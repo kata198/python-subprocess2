@@ -28,7 +28,7 @@ if __name__ == '__main__':
                           'Programming Language :: Python :: 3',
                           'Programming Language :: Python :: 3.4',
                           'Operating System :: POSIX',
-                          'Operating System :: POSIX :: LINUX',
+                          'Operating System :: POSIX :: Linux',
                           'Operating System :: Unix',
                           'Operating System :: Microsoft :: Windows',
                           'Topic :: System',
