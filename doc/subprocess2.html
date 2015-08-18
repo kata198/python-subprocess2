@@ -149,13 +149,16 @@ should&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;child.<br>
 attribute.</tt></dd></dl>
 
 <dl><dt><a name="Popen-waitOrTerminate"><strong>waitOrTerminate</strong></a>(self, timeoutSeconds, pollInterval<font color="#909090">=0.05</font>, terminateToKillSeconds<font color="#909090">=1.5</font>)</dt><dd><tt>waitOrTerminate&nbsp;-&nbsp;Wait&nbsp;up&nbsp;to&nbsp;a&nbsp;certain&nbsp;number&nbsp;of&nbsp;seconds&nbsp;for&nbsp;the&nbsp;process&nbsp;to&nbsp;end.<br>
+&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;the&nbsp;process&nbsp;is&nbsp;running&nbsp;after&nbsp;the&nbsp;timeout&nbsp;has&nbsp;been&nbsp;exceeded,&nbsp;a&nbsp;SIGTERM&nbsp;will&nbsp;be&nbsp;sent.&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Optionally,&nbsp;an&nbsp;additional&nbsp;SIGKILL&nbsp;can&nbsp;be&nbsp;sent&nbsp;after&nbsp;some&nbsp;configurable&nbsp;interval.&nbsp;See&nbsp;#terminateToKillSeconds&nbsp;doc&nbsp;below<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@param&nbsp;timeoutSeconds&nbsp;&lt;float&gt;&nbsp;-&nbsp;Number&nbsp;of&nbsp;seconds&nbsp;to&nbsp;wait<br>
+&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@param&nbsp;pollInterval&nbsp;&lt;float&gt;&nbsp;(default&nbsp;.05)-&nbsp;Number&nbsp;of&nbsp;seconds&nbsp;between&nbsp;each&nbsp;poll<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@param&nbsp;terminateToKillSeconds&nbsp;&lt;float/None&gt;&nbsp;(default&nbsp;1.5)&nbsp;-&nbsp;If&nbsp;application&nbsp;does&nbsp;not&nbsp;end&nbsp;before&nbsp;#timeoutSeconds&nbsp;,&nbsp;<a href="#Popen-terminate">terminate</a>()&nbsp;will&nbsp;be&nbsp;called.<br>
+&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;this&nbsp;is&nbsp;set&nbsp;to&nbsp;None,&nbsp;an&nbsp;additional&nbsp;#pollInterval&nbsp;sleep&nbsp;will&nbsp;occur&nbsp;after&nbsp;calling&nbsp;.terminate,&nbsp;to&nbsp;allow&nbsp;the&nbsp;application&nbsp;to&nbsp;cleanup.&nbsp;returnCode&nbsp;will&nbsp;be&nbsp;return&nbsp;of&nbsp;app&nbsp;if&nbsp;finished,&nbsp;or&nbsp;None&nbsp;if&nbsp;did&nbsp;not&nbsp;complete.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;this&nbsp;is&nbsp;set&nbsp;to&nbsp;0,&nbsp;no&nbsp;terminate&nbsp;signal&nbsp;will&nbsp;be&nbsp;sent,&nbsp;but&nbsp;directly&nbsp;to&nbsp;kill.&nbsp;Because&nbsp;the&nbsp;application&nbsp;cannot&nbsp;trap&nbsp;this,&nbsp;returnCode&nbsp;will&nbsp;be&nbsp;None.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;this&nbsp;is&nbsp;set&nbsp;to&nbsp;&gt;&nbsp;0,&nbsp;that&nbsp;number&nbsp;of&nbsp;seconds&nbsp;maximum&nbsp;will&nbsp;be&nbsp;given&nbsp;between&nbsp;.terminate&nbsp;and&nbsp;.kill.&nbsp;If&nbsp;the&nbsp;application&nbsp;does&nbsp;not&nbsp;terminate&nbsp;before&nbsp;KILL,&nbsp;returnCode&nbsp;will&nbsp;be&nbsp;None.<br>
@@ -170,6 +173,7 @@ attribute.</tt></dd></dl>
 <dl><dt><a name="Popen-waitUpTo"><strong>waitUpTo</strong></a>(self, timeoutSeconds, pollInterval<font color="#909090">=0.05</font>)</dt><dd><tt><a href="#Popen">Popen</a>.waitUpTo&nbsp;-&nbsp;Wait&nbsp;up&nbsp;to&nbsp;a&nbsp;certain&nbsp;number&nbsp;of&nbsp;seconds&nbsp;for&nbsp;the&nbsp;process&nbsp;to&nbsp;end.<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@param&nbsp;timeoutSeconds&nbsp;&lt;float&gt;&nbsp;-&nbsp;Number&nbsp;of&nbsp;seconds&nbsp;to&nbsp;wait<br>
+&nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@param&nbsp;pollInterval&nbsp;&lt;float&gt;&nbsp;(default&nbsp;.05)&nbsp;-&nbsp;Number&nbsp;of&nbsp;seconds&nbsp;in&nbsp;between&nbsp;each&nbsp;poll<br>
 &nbsp;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@return&nbsp;-&nbsp;Returncode&nbsp;of&nbsp;application,&nbsp;or&nbsp;None&nbsp;if&nbsp;did&nbsp;not&nbsp;terminate.</tt></dd></dl>

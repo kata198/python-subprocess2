@@ -11,6 +11,7 @@ Simply installing the subprocess2 module does not do anything to the parent subp
 
 
 
+
 PyDoc Reference
 ---------------
 
@@ -18,10 +19,14 @@ PyDoc Reference for extended subprocess modules can be found at: http://htmlprev
 
 
 
+
+
 Popen
 =====
 
 Additions to Popen class:
+
+
 
 
 waitUpTo
@@ -32,10 +37,15 @@ This method basically adds the ability to specify a "timeout" when waiting for a
 
     Popen.waitUpTo (timeoutSeconds, pollInterval) - Wait up to a certain number of seconds for the process to end.
 
+
         @param timeoutSeconds <float> - Number of seconds to wait
+
         @param pollInterval <float> (default .05) - Number of seconds in between each poll
 
+
         @return - Returncode of application, or None if did not terminate.
+
+
 
 
 
@@ -47,10 +57,13 @@ This method allows specifying a timeout, like waitUpTo, but will also handle ter
     Popen.waitOrTerminate (timeoutSeconds, pollInterval, terminateToKillSeconds)
 
         waitOrTerminate - Wait up to a certain number of seconds for the process to end.
+
             If the process is running after the timeout has been exceeded, a SIGTERM will be sent.
+
             Optionally, an additional SIGKILL can be sent after some configurable interval. See #terminateToKillSeconds doc below
 
             @param timeoutSeconds <float> - Number of seconds to wait
+
             @param pollInterval <float> (default .05)- Number of seconds between each poll
 
             @param terminateToKillSeconds <float/None> (default 1.5) - If application does not end before #timeoutSeconds , terminate() will be called.
@@ -61,7 +74,9 @@ This method allows specifying a timeout, like waitUpTo, but will also handle ter
         Windows Note -- On windows SIGTERM and SIGKILL are the same thing.
 
             @return dict { 'returnCode' : <int or None> , 'actionTaken' : <int mask of SUBPROCESS2_PROCESS_*> }
+
                 Returns a dict representing results:
+
                 "returnCode" matches return of application, or None per #terminateToKillSeconds doc above.
 
 
@@ -71,6 +86,7 @@ Compatability
 -------------
 
 It is both python2 and python3 compatable. It has been tested under python 2.7 and 3.4.
+
 
 Tests / Examples
 ----------------

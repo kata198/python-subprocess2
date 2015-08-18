@@ -31,6 +31,7 @@ This method basically adds the ability to specify a "timeout" when waiting for a
 	Popen.waitUpTo (timeoutSeconds, pollInterval) - Wait up to a certain number of seconds for the process to end.
 	
 		@param timeoutSeconds <float> - Number of seconds to wait
+
 		@param pollInterval <float> (default .05) - Number of seconds in between each poll
 	
 		@return - Returncode of application, or None if did not terminate.
@@ -49,6 +50,7 @@ This method allows specifying a timeout, like waitUpTo, but will also handle ter
 			Optionally, an additional SIGKILL can be sent after some configurable interval. See #terminateToKillSeconds doc below
 			
 			@param timeoutSeconds <float> - Number of seconds to wait
+
 			@param pollInterval <float> (default .05)- Number of seconds between each poll
 
 			@param terminateToKillSeconds <float/None> (default 1.5) - If application does not end before #timeoutSeconds , terminate() will be called.

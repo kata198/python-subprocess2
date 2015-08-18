@@ -30,8 +30,8 @@ SUBPROCESS2_PROCESS_COMPLETED  = 0
 SUBPROCESS2_PROCESS_TERMINATED = 1
 SUBPROCESS2_PROCESS_KILLED     = 2
 
-subprocess2_version = (0, 1, 0)
-subprocess2_version_str = '0.1.0'
+subprocess2_version = (0, 1, 1)
+subprocess2_version_str = '0.1.1'
 
 
 from subprocess import * # I know, bad form to import *, but ensures that you can use this interchangably with the upstream subprocess
@@ -56,6 +56,7 @@ def waitUpTo(self, timeoutSeconds, pollInterval=DEFAULT_POLL_INTERVAL):
         Popen.waitUpTo - Wait up to a certain number of seconds for the process to end.
 
             @param timeoutSeconds <float> - Number of seconds to wait
+
             @param pollInterval <float> (default .05) - Number of seconds in between each poll
 
             @return - Returncode of application, or None if did not terminate.
@@ -79,13 +80,16 @@ Popen.waitUpTo = waitUpTo
 def waitOrTerminate(self, timeoutSeconds, pollInterval=DEFAULT_POLL_INTERVAL, terminateToKillSeconds=SUBPROCESS2_DEFAULT_TERMINATE_TO_KILL_SECONDS):
     '''
         waitOrTerminate - Wait up to a certain number of seconds for the process to end.
+
             If the process is running after the timeout has been exceeded, a SIGTERM will be sent. 
             Optionally, an additional SIGKILL can be sent after some configurable interval. See #terminateToKillSeconds doc below
 
             @param timeoutSeconds <float> - Number of seconds to wait
+
             @param pollInterval <float> (default .05)- Number of seconds between each poll
 
             @param terminateToKillSeconds <float/None> (default 1.5) - If application does not end before #timeoutSeconds , terminate() will be called.
+
                 * If this is set to None, an additional #pollInterval sleep will occur after calling .terminate, to allow the application to cleanup. returnCode will be return of app if finished, or None if did not complete.
                 * If this is set to 0, no terminate signal will be sent, but directly to kill. Because the application cannot trap this, returnCode will be None.
                 * If this is set to > 0, that number of seconds maximum will be given between .terminate and .kill. If the application does not terminate before KILL, returnCode will be None.

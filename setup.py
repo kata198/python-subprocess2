@@ -8,7 +8,7 @@ with open('README.rst', 'r') as f:
 if __name__ == '__main__':
 
     setup(name='python-subprocess2',
-            version='0.1.0',
+            version='0.1.1',
             packages=['subprocess2'],
             author='Tim Savannah',
             author_email='kata198@gmail.com',
