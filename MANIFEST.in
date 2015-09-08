@@ -1,8 +1,8 @@
-recursive-include doc *
+recursive-include doc *.html
 recursive-include subprocess2 *.py
 recursive-include tests runTests.py
 recursive-include tests/subprocess2Tests *
-include Changelog
+include ChangeLog
 include README.md
 include README.rst
 include setup.py
