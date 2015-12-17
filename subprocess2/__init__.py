@@ -51,6 +51,9 @@ subprocess.SUBPROCESS2_DEFAULT_TERMINATE_TO_KILL_SECONDS = SUBPROCESS2_DEFAULT_T
 subprocess.subprocess2_version = subprocess2_version
 subprocess.subprocess2_version_str = subprocess2_version_str
 
+
+from .BackgroundTask import BackgroundTaskInfo
+
 def waitUpTo(self, timeoutSeconds, pollInterval=DEFAULT_POLL_INTERVAL):
     '''
         Popen.waitUpTo - Wait up to a certain number of seconds for the process to end.
@@ -138,5 +141,31 @@ def waitOrTerminate(self, timeoutSeconds, pollInterval=DEFAULT_POLL_INTERVAL, te
     }
 
 Popen.waitOrTerminate = waitOrTerminate
+
+
+def runInBackground(self, pollInterval=.1):
+    '''
+        runInBackground - Create a background thread which will manage this process, automatically read from streams, and perform any cleanups
+
+          The object returned is a "BackgroundTaskInfo" object, and represents the state of the process. It is updated automatically as the program runs,
+            and if stdout or stderr are streams, they are automatically read from and populated into this object.
+
+         @see BackgroundTaskInfo for more info
+
+        NOTE: for now, python2 will block updates if streams are active and there is data written but no newline written. python3 handles this okay.
+
+        @param pollInterval - Amount of idle time between polling
+    '''
+        
+    from .BackgroundTask import BackgroundTaskThread
+
+    taskInfo = BackgroundTaskInfo()
+    thread = BackgroundTaskThread(self, taskInfo, pollInterval)
+
+    thread.start()
+    #thread.run()  # Uncomment for debug
+    return taskInfo
+
+Popen.runInBackground = runInBackground
 
 # vim: ts=4 sw=4 expandtab :
