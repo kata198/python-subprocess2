@@ -62,10 +62,10 @@ or<br>
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="Popen-runInBackground"><strong>runInBackground</strong></a>(self, pollInterval<font color="#909090">=0.1</font>)</dt><dd><tt>runInBackground&nbsp;-&nbsp;Create&nbsp;a&nbsp;background&nbsp;thread&nbsp;which&nbsp;will&nbsp;manage&nbsp;this&nbsp;process,&nbsp;automatically&nbsp;read&nbsp;from&nbsp;streams,&nbsp;and&nbsp;perform&nbsp;any&nbsp;cleanups<br>
 &nbsp;<br>
-&nbsp;&nbsp;The&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;is&nbsp;a&nbsp;"BackgroundTaskInfo"&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;and&nbsp;represents&nbsp;the&nbsp;state&nbsp;of&nbsp;the&nbsp;process.&nbsp;It&nbsp;is&nbsp;updated&nbsp;automatically&nbsp;as&nbsp;the&nbsp;program&nbsp;runs,<br>
+&nbsp;&nbsp;The&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;is&nbsp;a&nbsp;"<a href="subprocess2.BackgroundTask.html">BackgroundTaskInfo"</a>&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;and&nbsp;represents&nbsp;the&nbsp;state&nbsp;of&nbsp;the&nbsp;process.&nbsp;It&nbsp;is&nbsp;updated&nbsp;automatically&nbsp;as&nbsp;the&nbsp;program&nbsp;runs,<br>
 &nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;if&nbsp;stdout&nbsp;or&nbsp;stderr&nbsp;are&nbsp;streams,&nbsp;they&nbsp;are&nbsp;automatically&nbsp;read&nbsp;from&nbsp;and&nbsp;populated&nbsp;into&nbsp;this&nbsp;<a href="__builtin__.html#object">object</a>.<br>
 &nbsp;<br>
-&nbsp;@see&nbsp;BackgroundTaskInfo&nbsp;for&nbsp;more&nbsp;info&nbsp;or&nbsp;<br>
+&nbsp;@see&nbsp;<a href="subprocess2.BackgroundTask.html">BackgroundTaskInfo</a>&nbsp;for&nbsp;more&nbsp;info&nbsp;or&nbsp;<br>
 &nbsp;<br>
 @param&nbsp;pollInterval&nbsp;-&nbsp;Amount&nbsp;of&nbsp;idle&nbsp;time&nbsp;between&nbsp;polling</tt></dd></dl>
 
@@ -111,45 +111,6 @@ Data descriptors defined here:<br>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 </td></tr></table></td></tr></table><p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#eeaa77">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
-    
-<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-call"><strong>call</strong></a>(*popenargs, **kwargs)</dt><dd><tt>Run&nbsp;command&nbsp;with&nbsp;arguments.&nbsp;&nbsp;Wait&nbsp;for&nbsp;command&nbsp;to&nbsp;complete,&nbsp;then<br>
-return&nbsp;the&nbsp;returncode&nbsp;attribute.<br>
-&nbsp;<br>
-The&nbsp;arguments&nbsp;are&nbsp;the&nbsp;same&nbsp;as&nbsp;for&nbsp;the&nbsp;<a href="#Popen">Popen</a>&nbsp;constructor.&nbsp;&nbsp;Example:<br>
-&nbsp;<br>
-retcode&nbsp;=&nbsp;<a href="#-call">call</a>(["ls",&nbsp;"-l"])</tt></dd></dl>
- <dl><dt><a name="-check_call"><strong>check_call</strong></a>(*popenargs, **kwargs)</dt><dd><tt>Run&nbsp;command&nbsp;with&nbsp;arguments.&nbsp;&nbsp;Wait&nbsp;for&nbsp;command&nbsp;to&nbsp;complete.&nbsp;&nbsp;If<br>
-the&nbsp;exit&nbsp;code&nbsp;was&nbsp;zero&nbsp;then&nbsp;return,&nbsp;otherwise&nbsp;raise<br>
-<a href="#CalledProcessError">CalledProcessError</a>.&nbsp;&nbsp;The&nbsp;<a href="#CalledProcessError">CalledProcessError</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;will&nbsp;have&nbsp;the<br>
-return&nbsp;code&nbsp;in&nbsp;the&nbsp;returncode&nbsp;attribute.<br>
-&nbsp;<br>
-The&nbsp;arguments&nbsp;are&nbsp;the&nbsp;same&nbsp;as&nbsp;for&nbsp;the&nbsp;<a href="#Popen">Popen</a>&nbsp;constructor.&nbsp;&nbsp;Example:<br>
-&nbsp;<br>
-<a href="#-check_call">check_call</a>(["ls",&nbsp;"-l"])</tt></dd></dl>
- <dl><dt><a name="-check_output"><strong>check_output</strong></a>(*popenargs, **kwargs)</dt><dd><tt>Run&nbsp;command&nbsp;with&nbsp;arguments&nbsp;and&nbsp;return&nbsp;its&nbsp;output&nbsp;as&nbsp;a&nbsp;byte&nbsp;string.<br>
-&nbsp;<br>
-If&nbsp;the&nbsp;exit&nbsp;code&nbsp;was&nbsp;non-zero&nbsp;it&nbsp;raises&nbsp;a&nbsp;<a href="#CalledProcessError">CalledProcessError</a>.&nbsp;&nbsp;The<br>
-<a href="#CalledProcessError">CalledProcessError</a>&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;will&nbsp;have&nbsp;the&nbsp;return&nbsp;code&nbsp;in&nbsp;the&nbsp;returncode<br>
-attribute&nbsp;and&nbsp;output&nbsp;in&nbsp;the&nbsp;output&nbsp;attribute.<br>
-&nbsp;<br>
-The&nbsp;arguments&nbsp;are&nbsp;the&nbsp;same&nbsp;as&nbsp;for&nbsp;the&nbsp;<a href="#Popen">Popen</a>&nbsp;constructor.&nbsp;&nbsp;Example:<br>
-&nbsp;<br>
-&gt;&gt;&gt;&nbsp;<a href="#-check_output">check_output</a>(["ls",&nbsp;"-l",&nbsp;"/dev/null"])<br>
-'crw-rw-rw-&nbsp;1&nbsp;root&nbsp;root&nbsp;1,&nbsp;3&nbsp;Oct&nbsp;18&nbsp;&nbsp;2007&nbsp;/dev/null\n'<br>
-&nbsp;<br>
-The&nbsp;stdout&nbsp;argument&nbsp;is&nbsp;not&nbsp;allowed&nbsp;as&nbsp;it&nbsp;is&nbsp;used&nbsp;internally.<br>
-To&nbsp;capture&nbsp;standard&nbsp;error&nbsp;in&nbsp;the&nbsp;result,&nbsp;use&nbsp;stderr=STDOUT.<br>
-&nbsp;<br>
-&gt;&gt;&gt;&nbsp;<a href="#-check_output">check_output</a>(["/bin/sh",&nbsp;"-c",<br>
-...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"ls&nbsp;-l&nbsp;non_existent_file&nbsp;;&nbsp;exit&nbsp;0"],<br>
-...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;stderr=STDOUT)<br>
-'ls:&nbsp;non_existent_file:&nbsp;No&nbsp;such&nbsp;file&nbsp;or&nbsp;directory\n'</tt></dd></dl>
-</td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
 <td colspan=3 valign=bottom>&nbsp;<br>
