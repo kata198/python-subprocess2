@@ -30,8 +30,9 @@ SUBPROCESS2_PROCESS_COMPLETED  = 0
 SUBPROCESS2_PROCESS_TERMINATED = 1
 SUBPROCESS2_PROCESS_KILLED     = 2
 
-subprocess2_version = (0, 1, 2)
-subprocess2_version_str = '0.1.2'
+
+subprocess2_version = '0.2.0'
+subprocess2_version_tuple = (0, 2, 0)
 
 
 from subprocess import * # I know, bad form to import *, but ensures that you can use this interchangably with the upstream subprocess
@@ -49,7 +50,7 @@ subprocess.SUBPROCESS2_PROCESS_KILLED = SUBPROCESS2_PROCESS_KILLED
 subprocess.DEFAULT_POLL_INTERVAL = DEFAULT_POLL_INTERVAL
 subprocess.SUBPROCESS2_DEFAULT_TERMINATE_TO_KILL_SECONDS = SUBPROCESS2_DEFAULT_TERMINATE_TO_KILL_SECONDS
 subprocess.subprocess2_version = subprocess2_version
-subprocess.subprocess2_version_str = subprocess2_version_str
+subprocess.subprocess2_version_tuple = subprocess2_version_tuple
 
 
 from .BackgroundTask import BackgroundTaskInfo
@@ -150,9 +151,7 @@ def runInBackground(self, pollInterval=.1):
           The object returned is a "BackgroundTaskInfo" object, and represents the state of the process. It is updated automatically as the program runs,
             and if stdout or stderr are streams, they are automatically read from and populated into this object.
 
-         @see BackgroundTaskInfo for more info
-
-        NOTE: for now, python2 will block updates if streams are active and there is data written but no newline written. python3 handles this okay.
+         @see BackgroundTaskInfo for more info or https://htmlpreview.github.io/?https://raw.githubusercontent.com/kata198/python-subprocess2/master/doc/subprocess2.BackgroundTask.html
 
         @param pollInterval - Amount of idle time between polling
     '''
@@ -163,7 +162,7 @@ def runInBackground(self, pollInterval=.1):
     thread = BackgroundTaskThread(self, taskInfo, pollInterval)
 
     thread.start()
-    #thread.run()  # Uncomment for debug
+    #thread.run()  # Uncomment to use pdb debug (will not run in background)
     return taskInfo
 
 Popen.runInBackground = runInBackground

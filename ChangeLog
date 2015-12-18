@@ -1,3 +1,9 @@
+- 0.2.0 - December 17 2015
+ * Add runInBackground to pipes, and implement background tasks
+ * Background tasks automatically collect from their streams (stdout, stderr), run in the background, and cleanup after themselves
+ * Associated updates, doc updates, etc around background task
+ * make subprocess2_version a string and subprocess2_version_tuple the int tuple.
+
 - 0.1.2 - September 8 2015
  * Some doc cleanups and pypi page cleanups
 
