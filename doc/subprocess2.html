@@ -49,74 +49,10 @@ or<br>
 <dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
 </font></dt><dd>
 <dl>
-<dt><font face="helvetica, arial"><a href="subprocess.html#CalledProcessError">subprocess.CalledProcessError</a>
 </font></dt></dl>
 </dd>
 </dl>
- <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#ffc8d8">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#000000" face="helvetica, arial"><a name="CalledProcessError">class <strong>CalledProcessError</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
-    
-<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>This&nbsp;exception&nbsp;is&nbsp;raised&nbsp;when&nbsp;a&nbsp;process&nbsp;run&nbsp;by&nbsp;<a href="#-check_call">check_call</a>()&nbsp;or<br>
-<a href="#-check_output">check_output</a>()&nbsp;returns&nbsp;a&nbsp;non-zero&nbsp;exit&nbsp;status.<br>
-The&nbsp;exit&nbsp;status&nbsp;will&nbsp;be&nbsp;stored&nbsp;in&nbsp;the&nbsp;returncode&nbsp;attribute;<br>
-<a href="#-check_output">check_output</a>()&nbsp;will&nbsp;also&nbsp;store&nbsp;the&nbsp;output&nbsp;in&nbsp;the&nbsp;output&nbsp;attribute.<br>&nbsp;</tt></td></tr>
-<tr><td>&nbsp;</td>
-<td width="100%"><dl><dt>Method resolution order:</dt>
-<dd><a href="subprocess.html#CalledProcessError">CalledProcessError</a></dd>
-<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
-<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
-<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
-</dl>
-<hr>
-Methods defined here:<br>
-<dl><dt><a name="CalledProcessError-__init__"><strong>__init__</strong></a>(self, returncode, cmd, output<font color="#909090">=None</font>)</dt></dl>
-
-<dl><dt><a name="CalledProcessError-__str__"><strong>__str__</strong></a>(self)</dt></dl>
-
-<hr>
-Data descriptors defined here:<br>
-<dl><dt><strong>__weakref__</strong></dt>
-<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
-</dl>
-<hr>
-Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
-<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#CalledProcessError-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
-
-<hr>
-Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
-<dl><dt><a name="CalledProcessError-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#CalledProcessError-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
-
-<dl><dt><a name="CalledProcessError-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#CalledProcessError-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
-
-<dl><dt><a name="CalledProcessError-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#CalledProcessError-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
-
-<dl><dt><a name="CalledProcessError-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#CalledProcessError-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
-&nbsp;<br>
-Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
-
-<dl><dt><a name="CalledProcessError-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="CalledProcessError-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#CalledProcessError-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
-
-<dl><dt><a name="CalledProcessError-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#CalledProcessError-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="CalledProcessError-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
-
-<dl><dt><a name="CalledProcessError-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
-
-<hr>
-Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
-<dl><dt><strong>__dict__</strong></dt>
-</dl>
-<dl><dt><strong>args</strong></dt>
-</dl>
-<dl><dt><strong>message</strong></dt>
-</dl>
-</td></tr></table> <p>
+<p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ffc8d8">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -124,24 +60,6 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
-<dl><dt><a name="Popen-__del__"><strong>__del__</strong></a>(self, _maxint<font color="#909090">=9223372036854775807</font>)</dt></dl>
-
-<dl><dt><a name="Popen-__init__"><strong>__init__</strong></a>(self, args, bufsize<font color="#909090">=0</font>, executable<font color="#909090">=None</font>, stdin<font color="#909090">=None</font>, stdout<font color="#909090">=None</font>, stderr<font color="#909090">=None</font>, preexec_fn<font color="#909090">=None</font>, close_fds<font color="#909090">=False</font>, shell<font color="#909090">=False</font>, cwd<font color="#909090">=None</font>, env<font color="#909090">=None</font>, universal_newlines<font color="#909090">=False</font>, startupinfo<font color="#909090">=None</font>, creationflags<font color="#909090">=0</font>)</dt><dd><tt>Create&nbsp;new&nbsp;<a href="#Popen">Popen</a>&nbsp;instance.</tt></dd></dl>
-
-<dl><dt><a name="Popen-communicate"><strong>communicate</strong></a>(self, input<font color="#909090">=None</font>)</dt><dd><tt>Interact&nbsp;with&nbsp;process:&nbsp;Send&nbsp;data&nbsp;to&nbsp;stdin.&nbsp;&nbsp;Read&nbsp;data&nbsp;from<br>
-stdout&nbsp;and&nbsp;stderr,&nbsp;until&nbsp;end-of-file&nbsp;is&nbsp;reached.&nbsp;&nbsp;Wait&nbsp;for<br>
-process&nbsp;to&nbsp;terminate.&nbsp;&nbsp;The&nbsp;optional&nbsp;input&nbsp;argument&nbsp;should&nbsp;be&nbsp;a<br>
-string&nbsp;to&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;child&nbsp;process,&nbsp;or&nbsp;None,&nbsp;if&nbsp;no&nbsp;data<br>
-should&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;child.<br>
-&nbsp;<br>
-<a href="#Popen-communicate">communicate</a>()&nbsp;returns&nbsp;a&nbsp;tuple&nbsp;(stdout,&nbsp;stderr).</tt></dd></dl>
-
-<dl><dt><a name="Popen-kill"><strong>kill</strong></a>(self)</dt><dd><tt>Kill&nbsp;the&nbsp;process&nbsp;with&nbsp;SIGKILL</tt></dd></dl>
-
-<dl><dt><a name="Popen-pipe_cloexec"><strong>pipe_cloexec</strong></a>(self)</dt><dd><tt>Create&nbsp;a&nbsp;pipe&nbsp;with&nbsp;FDs&nbsp;set&nbsp;CLOEXEC.</tt></dd></dl>
-
-<dl><dt><a name="Popen-poll"><strong>poll</strong></a>(self)</dt></dl>
-
 <dl><dt><a name="Popen-runInBackground"><strong>runInBackground</strong></a>(self, pollInterval<font color="#909090">=0.1</font>)</dt><dd><tt>runInBackground&nbsp;-&nbsp;Create&nbsp;a&nbsp;background&nbsp;thread&nbsp;which&nbsp;will&nbsp;manage&nbsp;this&nbsp;process,&nbsp;automatically&nbsp;read&nbsp;from&nbsp;streams,&nbsp;and&nbsp;perform&nbsp;any&nbsp;cleanups<br>
 &nbsp;<br>
 &nbsp;&nbsp;The&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;returned&nbsp;is&nbsp;a&nbsp;"BackgroundTaskInfo"&nbsp;<a href="__builtin__.html#object">object</a>,&nbsp;and&nbsp;represents&nbsp;the&nbsp;state&nbsp;of&nbsp;the&nbsp;process.&nbsp;It&nbsp;is&nbsp;updated&nbsp;automatically&nbsp;as&nbsp;the&nbsp;program&nbsp;runs,<br>
@@ -150,10 +68,6 @@ should&nbsp;be&nbsp;sent&nbsp;to&nbsp;the&nbsp;child.<br>
 &nbsp;@see&nbsp;BackgroundTaskInfo&nbsp;for&nbsp;more&nbsp;info&nbsp;or&nbsp;<br>
 &nbsp;<br>
 @param&nbsp;pollInterval&nbsp;-&nbsp;Amount&nbsp;of&nbsp;idle&nbsp;time&nbsp;between&nbsp;polling</tt></dd></dl>
-
-<dl><dt><a name="Popen-send_signal"><strong>send_signal</strong></a>(self, sig)</dt><dd><tt>Send&nbsp;a&nbsp;signal&nbsp;to&nbsp;the&nbsp;process</tt></dd></dl>
-
-<dl><dt><a name="Popen-terminate"><strong>terminate</strong></a>(self)</dt><dd><tt>Terminate&nbsp;the&nbsp;process&nbsp;with&nbsp;SIGTERM</tt></dd></dl>
 
 <dl><dt><a name="Popen-wait"><strong>wait</strong></a>(self)</dt><dd><tt>Wait&nbsp;for&nbsp;child&nbsp;process&nbsp;to&nbsp;terminate.&nbsp;&nbsp;Returns&nbsp;returncode<br>
 attribute.</tt></dd></dl>
