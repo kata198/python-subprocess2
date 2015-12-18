@@ -75,7 +75,10 @@ Background Task Management
 
 One of the benefits to modern computing is the ability to multitask. Your application may want to start several sub processes at once, and have them all collecting output simultaneously. The standard python "subprocess" module does not provide a simple approach through it's API to do this.
 
-subprocess2 extends the Popen module by adding the notion of a "Background Task." When you call "runInBackground" on a pipe object, it will create and start a thread to automatically handle that process. Calling that method returns a "BackgroundTaskInfo" option, which is dynamically updated as the status the subprocess progresses. If you have open streams (stdout, stderr), they will automatically be read in non-blocking fashion into "stdoutData" and "stderrData" respectively on that object. When the subprocess terminates, the "returnCode" field will be set, and "isFinished" will be marked True.
+subprocess2 extends the Popen module by adding the notion of a "Background Task." When you call "runInBackground" on a pipe object, it will create and start a thread to automatically handle that process. 
+Calling "runInBackground" on a pipe returns a "BackgroundTaskInfo" option, which is dynamically updated as the status the subprocess progresses. 
+If you have open streams (stdout, stderr), they will automatically be read in non-blocking fashion into "stdoutData" and "stderrData" respectively on that object. 
+When the subprocess terminates, the "returnCode" field will be set, and "isFinished" will be marked True.
 
 You can use this to farm out 10 processes quickly, collect all their data, and wait for them to complete. Other uses may be long-running associated proccesses, such as several searches collecting data, all being used to update a display.
 
