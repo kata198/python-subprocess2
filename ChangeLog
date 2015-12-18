@@ -1,3 +1,6 @@
+- 0.2.1 - December 18 2015
+ * Fixup setup.py to be cleaner
+
 - 0.2.0 - December 17 2015
  * Add runInBackground to pipes, and implement background tasks
  * Background tasks automatically collect from their streams (stdout, stderr), run in the background, and cleanup after themselves

@@ -31,8 +31,8 @@ SUBPROCESS2_PROCESS_TERMINATED = 1
 SUBPROCESS2_PROCESS_KILLED     = 2
 
 
-subprocess2_version = '0.2.0'
-subprocess2_version_tuple = (0, 2, 0)
+subprocess2_version = '0.2.1'
+subprocess2_version_tuple = (0, 2, 1)
 
 
 from subprocess import * # I know, bad form to import *, but ensures that you can use this interchangably with the upstream subprocess

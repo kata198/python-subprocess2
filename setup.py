@@ -2,20 +2,24 @@
 
 from setuptools import setup
 
-with open('README.rst', 'r') as f:
-    long_description = f.read()
 
 if __name__ == '__main__':
+    summary = 'Extensions to the upstream python subprocess module'
+    try:
+        with open('README.rst', 'rt') as f:
+            long_description = f.read()
+    except:
+        long_description = summary
 
     setup(name='python-subprocess2',
-            version='0.2.0',
+            version='0.2.1',
             packages=['subprocess2'],
             author='Tim Savannah',
             author_email='kata198@gmail.com',
             maintainer='Tim Savannah',
             url='https://github.com/kata198/python-subprocess2',
             maintainer_email='kata198@gmail.com',
-            description='Extensions to the upstream python subprocess module',
+            description=summary,
             long_description=long_description,
             license='LGPLv3',
             keywords=['python', 'subprocess', 'Popen', 'pipe', 'wait', 'timeout', 'terminate', 'kill', 'sigterm', 'sigkill', 'process', 'management', 'waitUpTo', 'waitOrTerminate'],
