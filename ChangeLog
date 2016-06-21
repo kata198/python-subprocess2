@@ -1,3 +1,12 @@
+- 1.0.0 - June 21 2016
+ * Add "encoding" field to runInBackground method (and BackgroundTask classes)
+ to perform automatic decoding from bytes to a str/unicode object.
+ * Added test for background reads with/without encoding
+ * Bumped version to 1.0.0 - It's been proven stable and production-quality
+ for a while now.
+ * Updated copyrights to include 2016
+ * Fixup some missing tabs in docs
+
 - 0.2.1 - December 18 2015
  * Fixup setup.py to be cleaner
 

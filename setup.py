@@ -12,7 +12,7 @@ if __name__ == '__main__':
         long_description = summary
 
     setup(name='python-subprocess2',
-            version='0.2.1',
+            version='1.0.0',
             packages=['subprocess2'],
             author='Tim Savannah',
             author_email='kata198@gmail.com',

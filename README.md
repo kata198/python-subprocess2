@@ -86,9 +86,13 @@ When the subprocess terminates, the "returnCode" field will be set, and "isFinis
 
 You can use this to farm out 10 processes quickly, collect all their data, and wait for them to complete. Other uses may be long-running associated proccesses, such as several searches collecting data, all being used to update a display.
 
+
+By default, data will be stored as bytes. To decode with a specific encoding (e.x. utf-8), pass the codec name as the "encoding" argument.
+
+
 Method Signature:
 
-	def runInBackground(self, pollInterval=.1):
+	def runInBackground(self, pollInterval=.1, encoding=False):
 		'''
 			runInBackground - Create a background thread which will manage this process, automatically read from streams, and perform any cleanups
 
@@ -98,6 +102,7 @@ Method Signature:
 			 @see BackgroundTaskInfo for more info or https://htmlpreview.github.io/?https://raw.githubusercontent.com/kata198/python-subprocess2/master/doc/subprocess2.BackgroundTask.html
 
 			@param pollInterval - Amount of idle time between polling
+			@param encoding - Default False. If provided, data will be decoded using the value of this field as the codec name (e.x. "utf-8"). Otherwise, data will be stored as bytes.
 		'''
 
 Object returned:
@@ -139,15 +144,16 @@ will have two processes running in the background, collecting their output autom
 If you decide later you wait to block the current context until one of those pipes complete, you can pull it back into foreground (while maintaining the automatic population of streams/values) by calling "waitToFinish" on the BackgroundTaskInfo.
 
 
-    def waitToFinish(self, timeout=None, pollInterval=.1):
-        '''
-            waitToFinish - Wait (Block current thread), optionally with a timeout, until background task completes.
+	def waitToFinish(self, timeout=None, pollInterval=.1):
+		'''
+			waitToFinish - Wait (Block current thread), optionally with a timeout, until background task completes.
 
-            @param timeout <None/float> - None to wait forever, otherwise max number of seconds to wait
-            @param pollInterval <float> - Seconds between each poll. Keep high if interactivity is not important, low if it is.
+			@param timeout <None/float> - None to wait forever, otherwise max number of seconds to wait
+			@param pollInterval <float> - Seconds between each poll. Keep high if interactivity is not important, low if it is.
 
-            @return - None if process did not complete (and timeout occured), otherwise the return code of the process is returned.
-        '''
+			@return - None if process did not complete (and timeout occured), otherwise the return code of the process is returned.
+		'''
+
 
 So, to continue the example above:
 

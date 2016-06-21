@@ -9,13 +9,13 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="subprocess2.html"><font color="#ffffff">subprocess2</font></a>.BackgroundTask</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href="subprocess2.html">index</a><br /></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href="subprocess2.html">index</a><br></td></tr></table>
     <p><tt>BackgroundTask.py&nbsp;-&nbsp;This&nbsp;contains&nbsp;the&nbsp;implementation&nbsp;and&nbsp;data&nbsp;storage&nbsp;for&nbsp;background&nbsp;tasks.<br>
 &nbsp;<br>
 Copyright&nbsp;(c)&nbsp;2015&nbsp;Timothy&nbsp;Savannah&nbsp;LGPLv2&nbsp;All&nbsp;rights&nbsp;reserved.&nbsp;See&nbsp;LICENSE&nbsp;file&nbsp;for&nbsp;more&nbsp;details.<br>
 &nbsp;<br>
 &nbsp;&nbsp;<br>
-<a href="#BackgroundTaskInfo">BackgroundTaskInfo</a>&nbsp;-&nbsp;This&nbsp;is&nbsp;the&nbsp;data&nbsp;structure&nbsp;returned&nbsp;immediatly&nbsp;from&nbsp;Popen.runInBackground.<br>
+<a href="#BackgroundTaskInfo">BackgroundTaskInfo</a>&nbsp;-&nbsp;This&nbsp;is&nbsp;the&nbsp;data&nbsp;structure&nbsp;returned&nbsp;immediately&nbsp;from&nbsp;Popen.runInBackground.<br>
 &nbsp;<br>
 _py_read1&nbsp;-&nbsp;Pure-python&nbsp;implementation&nbsp;of&nbsp;read1&nbsp;method&nbsp;for&nbsp;non-blocking&nbsp;stream&nbsp;I/O&nbsp;<br>
 &nbsp;<br>
@@ -65,20 +65,22 @@ _py_read1&nbsp;-&nbsp;Pure-python&nbsp;implementation&nbsp;of&nbsp;read1&nbsp;me
 &nbsp;<br>
 This&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;populates&nbsp;its&nbsp;data&nbsp;automatically&nbsp;as&nbsp;the&nbsp;program&nbsp;runs&nbsp;in&nbsp;the&nbsp;background,&nbsp;managed&nbsp;by&nbsp;a&nbsp;thread.<br>
 &nbsp;<br>
+Optional&nbsp;arg&nbsp;"encoding"&nbsp;-&nbsp;If&nbsp;provided,&nbsp;data&nbsp;will&nbsp;be&nbsp;automatically&nbsp;decoded&nbsp;using&nbsp;this&nbsp;codec.&nbsp;Otherwise,&nbsp;data&nbsp;will&nbsp;be&nbsp;stored&nbsp;as&nbsp;bytes.<br>
+&nbsp;<br>
 FIELDS:<br>
 &nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;stdoutData&nbsp;-&nbsp;Bytes&nbsp;read&nbsp;from&nbsp;stdout,&nbsp;if&nbsp;stdout&nbsp;was&nbsp;a&nbsp;pipe,&nbsp;or&nbsp;from&nbsp;stderr&nbsp;if&nbsp;stderr&nbsp;was&nbsp;set&nbsp;to&nbsp;subprocess.STDOUT<br>
-&nbsp;&nbsp;&nbsp;&nbsp;stderrData&nbsp;-&nbsp;Bytes&nbsp;read&nbsp;from&nbsp;stderr,&nbsp;if&nbsp;different&nbsp;pipe&nbsp;than&nbsp;stdout.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;stdoutData&nbsp;-&nbsp;Bytes&nbsp;read&nbsp;automatically&nbsp;from&nbsp;stdout,&nbsp;if&nbsp;stdout&nbsp;was&nbsp;a&nbsp;pipe,&nbsp;or&nbsp;from&nbsp;stderr&nbsp;if&nbsp;stderr&nbsp;was&nbsp;set&nbsp;to&nbsp;subprocess.STDOUT<br>
+&nbsp;&nbsp;&nbsp;&nbsp;stderrData&nbsp;-&nbsp;Bytes&nbsp;read&nbsp;automatically&nbsp;from&nbsp;stderr,&nbsp;if&nbsp;different&nbsp;pipe&nbsp;than&nbsp;stdout.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;isFinished&nbsp;-&nbsp;False&nbsp;while&nbsp;the&nbsp;background&nbsp;application&nbsp;is&nbsp;running,&nbsp;True&nbsp;when&nbsp;it&nbsp;completes.<br>
 &nbsp;&nbsp;&nbsp;&nbsp;returnCode&nbsp;-&nbsp;None&nbsp;if&nbsp;the&nbsp;program&nbsp;has&nbsp;not&nbsp;completed,&nbsp;otherwise&nbsp;the&nbsp;numeric&nbsp;return&nbsp;code.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;timeElapsed&nbsp;-&nbsp;Float&nbsp;of&nbsp;how&nbsp;many&nbsp;seconds&nbsp;have&nbsp;elapsed&nbsp;since&nbsp;the&nbsp;last&nbsp;update&nbsp;(updates&nbsp;are&nbsp;very&nbsp;close&nbsp;to&nbsp;the&nbsp;"pollInterval"&nbsp;provided&nbsp;when&nbsp;calling&nbsp;runInBackground)<br>&nbsp;</tt></td></tr>
+&nbsp;&nbsp;&nbsp;&nbsp;timeElapsed&nbsp;-&nbsp;Float&nbsp;of&nbsp;how&nbsp;many&nbsp;seconds&nbsp;have&nbsp;elapsed&nbsp;since&nbsp;the&nbsp;last&nbsp;update&nbsp;(updates&nbsp;happen&nbsp;very&nbsp;close&nbsp;to&nbsp;the&nbsp;"pollInterval"&nbsp;provided&nbsp;when&nbsp;calling&nbsp;runInBackground)<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
 <dl><dt><a name="BackgroundTaskInfo-__contains__"><strong>__contains__</strong></a>(self, name)</dt></dl>
 
 <dl><dt><a name="BackgroundTaskInfo-__getitem__"><strong>__getitem__</strong></a>(self, name)</dt></dl>
 
-<dl><dt><a name="BackgroundTaskInfo-__init__"><strong>__init__</strong></a>(self)</dt></dl>
+<dl><dt><a name="BackgroundTaskInfo-__init__"><strong>__init__</strong></a>(self, encoding<font color="#909090">=False</font>)</dt></dl>
 
 <dl><dt><a name="BackgroundTaskInfo-__repr__"><strong>__repr__</strong></a>(self)</dt></dl>
 
@@ -109,7 +111,7 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Data and other attributes defined here:<br>
-<dl><dt><strong>FIELDS</strong> = ('stdoutData', 'stderrData', 'isFinished', 'returnCode', 'timeElapsed')</dl>
+<dl><dt><strong>FIELDS</strong> = ('stdoutData', 'stderrData', 'isFinished', 'returnCode', 'timeElapsed', 'encoding')</dl>
 
 </td></tr></table> <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
@@ -128,7 +130,7 @@ Data and other attributes defined here:<br>
 </dl>
 <hr>
 Methods defined here:<br>
-<dl><dt><a name="BackgroundTaskThread-__init__"><strong>__init__</strong></a>(self, pipe, taskInfo, pollInterval<font color="#909090">=0.1</font>)</dt></dl>
+<dl><dt><a name="BackgroundTaskThread-__init__"><strong>__init__</strong></a>(self, pipe, taskInfo, pollInterval<font color="#909090">=0.1</font>, encoding<font color="#909090">=False</font>)</dt></dl>
 
 <dl><dt><a name="BackgroundTaskThread-run"><strong>run</strong></a>(self)</dt></dl>
 
