@@ -71,7 +71,41 @@ class TestBackgroundTask(object):
         # 13.5 seconds
         assert bgData.isFinished is True , 'Expected app to be finished at 13.5 seconds'
         assert bgData.returnCode == 4 , 'Expected return code from app to be 4, got %s' %(str(bgData.returnCode),)
-        
+
+    def test_encodings(self):
+        if bytes == str:
+            encodedType = str
+            decodedType = unicode
+        else:
+            encodedType = bytes
+            decodedType = str
+
+        pipe = subprocess.Popen([self.slowPrinterPath], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        bgData = pipe.runInBackground(.1)
+        time.sleep(3)
+
+        assert type(bgData.stdoutData) == encodedType , 'Expected no provided encoding to be encoded type (%s), got %s' %(encodedType.__name__, type(bgData.stdoutData).__name__)
+        pipe.terminate()
+        try:
+            os.kill(pipe.pid, 9)
+        except:
+            pass
+        pipe.wait()
+
+        pipe = subprocess.Popen([self.slowPrinterPath], shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        bgData = pipe.runInBackground(.1, encoding='utf-8')
+        time.sleep(3)
+
+        assert type(bgData.stdoutData) == decodedType , 'Expected data read when encoding="utf-8" to be encoded type (%s), got %s' %(decodedType.__name__, type(bgData.stdoutData).__name__)
+        pipe.terminate()
+        try:
+            os.kill(pipe.pid, 9)
+        except:
+            pass
+        pipe.wait()
+
 
 if __name__ == '__main__':
     subprocess.Popen('GoodTests.py "%s"' %(sys.argv[0],), shell=True).wait()

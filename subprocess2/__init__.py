@@ -1,7 +1,7 @@
 '''
     python-subprocess2
    
-  Copyright (c) 2015 Timothy Savannah LGPL All rights reserved. See LICENSE file for more details.
+  Copyright (c) 2015-2016 Timothy Savannah LGPL All rights reserved. See LICENSE file for more details.
 
   This module provides extensions to the standard "subprocess" module
   Importing this module modifies the global subprocess module. You can use it like:
@@ -144,7 +144,7 @@ def waitOrTerminate(self, timeoutSeconds, pollInterval=DEFAULT_POLL_INTERVAL, te
 Popen.waitOrTerminate = waitOrTerminate
 
 
-def runInBackground(self, pollInterval=.1):
+def runInBackground(self, pollInterval=.1, encoding=False):
     '''
         runInBackground - Create a background thread which will manage this process, automatically read from streams, and perform any cleanups
 
@@ -154,12 +154,13 @@ def runInBackground(self, pollInterval=.1):
          @see BackgroundTaskInfo for more info or https://htmlpreview.github.io/?https://raw.githubusercontent.com/kata198/python-subprocess2/master/doc/subprocess2.BackgroundTask.html
 
         @param pollInterval - Amount of idle time between polling
+        @param encoding - Default False. If provided, data will be decoded using the value of this field as the codec name (e.x. "utf-8"). Otherwise, data will be stored as bytes.
     '''
         
     from .BackgroundTask import BackgroundTaskThread
 
-    taskInfo = BackgroundTaskInfo()
-    thread = BackgroundTaskThread(self, taskInfo, pollInterval)
+    taskInfo = BackgroundTaskInfo(encoding)
+    thread = BackgroundTaskThread(self, taskInfo, pollInterval, encoding)
 
     thread.start()
     #thread.run()  # Uncomment to use pdb debug (will not run in background)

@@ -1,10 +1,10 @@
 '''
   BackgroundTask.py - This contains the implementation and data storage for background tasks.
    
-  Copyright (c) 2015 Timothy Savannah LGPLv2 All rights reserved. See LICENSE file for more details.
+  Copyright (c) 2015-2016 Timothy Savannah LGPLv2 All rights reserved. See LICENSE file for more details.
 
     
-  BackgroundTaskInfo - This is the data structure returned immediatly from Popen.runInBackground.
+  BackgroundTaskInfo - This is the data structure returned immediately from Popen.runInBackground.
 
   _py_read1 - Pure-python implementation of read1 method for non-blocking stream I/O 
 
@@ -27,6 +27,8 @@ class BackgroundTaskInfo(object):
 
         This object populates its data automatically as the program runs in the background, managed by a thread.
 
+        Optional arg "encoding" - If provided, data will be automatically decoded using this codec. Otherwise, data will be stored as bytes.
+
         FIELDS:
 
             stdoutData - Bytes read automatically from stdout, if stdout was a pipe, or from stderr if stderr was set to subprocess.STDOUT
@@ -38,11 +40,18 @@ class BackgroundTaskInfo(object):
     '''
 
     # All fields for export
-    FIELDS = ('stdoutData', 'stderrData', 'isFinished', 'returnCode', 'timeElapsed')
+    FIELDS = ('stdoutData', 'stderrData', 'isFinished', 'returnCode', 'timeElapsed', 'encoding')
 
-    def __init__(self):
+    def __init__(self, encoding=False):
         self.stdoutData = b''
         self.stderrData = b''
+        self.encoding = encoding
+        if encoding:
+            try:
+                self.stdoutData = self.stdoutData.decode(encoding)
+                self.stderrData = self.stderrData.decode(encoding)
+            except Exception as e:
+                raise ValueError('Cannot decode using codec %s: %s' %(repr(encoding), str(e)))
         self.isFinished = False
         self.returnCode = None
         self.timeElapsed = 0
@@ -121,7 +130,7 @@ def _py_read1(fileObj, maxBuffer):
             break
         i += 1
         ret.append(c)
-        # Use a very low timeout so we only grab more data if it's immediatly available.
+        # Use a very low timeout so we only grab more data if it's immediately available.
         (readyToRead, junk1, junk2) = select.select([fileObj], [], [], .00001)
         if not readyToRead:
             break
@@ -135,11 +144,12 @@ class BackgroundTaskThread(threading.Thread):
     '''
 
 
-    def __init__(self, pipe, taskInfo, pollInterval=.1):
+    def __init__(self, pipe, taskInfo, pollInterval=.1, encoding=False):
         threading.Thread.__init__(self)
         self.pipe = pipe
         self.taskInfo = taskInfo
         self.pollInterval = pollInterval
+        self.encoding = encoding
         self.daemon = True # This is a background task, so if everything else is finished the program should exit
 
     def run(self):
@@ -148,6 +158,7 @@ class BackgroundTaskThread(threading.Thread):
         pipe = self.pipe
         taskInfo = self.taskInfo
         pollInterval = self.pollInterval
+        encoding = self.encoding
 
         # All streams we are going to manage
         streams = []
@@ -204,6 +215,9 @@ class BackgroundTaskThread(threading.Thread):
                             data = stream.read1(4096)
                         else:
                             data = _py_read1(stream, 4096)
+
+                        if encoding:
+                            data = data.decode(encoding)
 
                         # Append into correct location
                         if ionum == 1:
