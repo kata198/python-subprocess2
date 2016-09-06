@@ -9,10 +9,10 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>subprocess2</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href="subprocess2.html">index</a><br></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href="subprocess2.html">index</a></font></td></tr></table>
     <p><tt>&nbsp;&nbsp;python-subprocess2<br>
 &nbsp;<br>
-Copyright&nbsp;(c)&nbsp;2015&nbsp;Timothy&nbsp;Savannah&nbsp;LGPL&nbsp;All&nbsp;rights&nbsp;reserved.&nbsp;See&nbsp;LICENSE&nbsp;file&nbsp;for&nbsp;more&nbsp;details.<br>
+Copyright&nbsp;(c)&nbsp;2015-2016&nbsp;Timothy&nbsp;Savannah&nbsp;LGPL&nbsp;All&nbsp;rights&nbsp;reserved.&nbsp;See&nbsp;LICENSE&nbsp;file&nbsp;for&nbsp;more&nbsp;details.<br>
 &nbsp;<br>
 This&nbsp;module&nbsp;provides&nbsp;extensions&nbsp;to&nbsp;the&nbsp;standard&nbsp;"subprocess"&nbsp;module<br>
 Importing&nbsp;this&nbsp;module&nbsp;modifies&nbsp;the&nbsp;global&nbsp;subprocess&nbsp;module.&nbsp;You&nbsp;can&nbsp;use&nbsp;it&nbsp;like:<br>
@@ -32,7 +32,8 @@ or<br>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="subprocess2.BackgroundTask.html">BackgroundTask</a><br>
-</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top><a href="subprocess2.simple.html">simple</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -44,12 +45,14 @@ or<br>
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="subprocess.html#Popen">subprocess.Popen</a>
+</font></dt><dt><font face="helvetica, arial"><a href="subprocess2.simple.html#Simple">subprocess2.simple.Simple</a>
 </font></dt></dl>
 </dd>
 <dt><font face="helvetica, arial"><a href="exceptions.html#Exception">exceptions.Exception</a>(<a href="exceptions.html#BaseException">exceptions.BaseException</a>)
 </font></dt><dd>
 <dl>
 <dt><font face="helvetica, arial"><a href="subprocess.html#CalledProcessError">subprocess.CalledProcessError</a>
+</font></dt><dt><font face="helvetica, arial"><a href="subprocess2.simple.html#SimpleCommandFailure">subprocess2.simple.SimpleCommandFailure</a>
 </font></dt></dl>
 </dd>
 </dl>
@@ -124,7 +127,7 @@ Data descriptors inherited from <a href="exceptions.html#BaseException">exceptio
     
 <tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%">Methods defined here:<br>
-<dl><dt><a name="Popen-__del__"><strong>__del__</strong></a>(self, _maxint<font color="#909090">=9223372036854775807</font>)</dt></dl>
+<dl><dt><a name="Popen-__del__"><strong>__del__</strong></a>(self, _maxint<font color="#909090">=2147483647</font>)</dt></dl>
 
 <dl><dt><a name="Popen-__init__"><strong>__init__</strong></a>(self, args, bufsize<font color="#909090">=0</font>, executable<font color="#909090">=None</font>, stdin<font color="#909090">=None</font>, stdout<font color="#909090">=None</font>, stderr<font color="#909090">=None</font>, preexec_fn<font color="#909090">=None</font>, close_fds<font color="#909090">=False</font>, shell<font color="#909090">=False</font>, cwd<font color="#909090">=None</font>, env<font color="#909090">=None</font>, universal_newlines<font color="#909090">=False</font>, startupinfo<font color="#909090">=None</font>, creationflags<font color="#909090">=0</font>)</dt><dd><tt>Create&nbsp;new&nbsp;<a href="#Popen">Popen</a>&nbsp;instance.</tt></dd></dl>
 
@@ -197,6 +200,176 @@ Data descriptors defined here:<br>
 <dl><dt><strong>__weakref__</strong></dt>
 <dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Simple">class <strong>Simple</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Simple">Simple</a>&nbsp;-&nbsp;<a href="#Simple">Simple</a>&nbsp;and&nbsp;quick&nbsp;commands&nbsp;to&nbsp;run&nbsp;a&nbsp;subprocess&nbsp;and&nbsp;get&nbsp;the&nbsp;results.<br>
+&nbsp;<br>
+Static&nbsp;Methods:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;runGetOutput&nbsp;-&nbsp;Simply&nbsp;runs&nbsp;a&nbsp;command&nbsp;and&nbsp;returns&nbsp;the&nbsp;program's&nbsp;output.&nbsp;Optionally&nbsp;raises&nbsp;<a href="#SimpleCommandFailure">SimpleCommandFailure</a>&nbsp;on&nbsp;failure.&nbsp;@see&nbsp;#runGetOutput&nbsp;for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;runGetResults&nbsp;-&nbsp;Runs&nbsp;a&nbsp;command&nbsp;and&nbsp;based&nbsp;on&nbsp;paramaters&nbsp;returns&nbsp;a&nbsp;dict&nbsp;containing:&nbsp;returnCode,&nbsp;stdout,&nbsp;stderr.&nbsp;@see&nbsp;#runGetResults&nbsp;for&nbsp;more&nbsp;details.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Static methods defined here:<br>
+<dl><dt><a name="Simple-runGetOutput"><strong>runGetOutput</strong></a>(cmd, raiseOnFailure<font color="#909090">=False</font>, encoding<font color="#909090">='ascii'</font>)</dt><dd><tt>runGetOutput&nbsp;-&nbsp;Simply&nbsp;runs&nbsp;a&nbsp;command&nbsp;and&nbsp;returns&nbsp;the&nbsp;output&nbsp;as&nbsp;a&nbsp;string.&nbsp;Use&nbsp;#runGetResults&nbsp;if&nbsp;you&nbsp;need&nbsp;something&nbsp;more&nbsp;complex.<br>
+&nbsp;<br>
+@param&nbsp;cmd&nbsp;&lt;str/list&gt;&nbsp;-&nbsp;String&nbsp;of&nbsp;command&nbsp;and&nbsp;arguments,&nbsp;or&nbsp;list&nbsp;of&nbsp;command&nbsp;and&nbsp;arguments<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;cmd&nbsp;is&nbsp;a&nbsp;string,&nbsp;the&nbsp;command&nbsp;will&nbsp;be&nbsp;executed&nbsp;as&nbsp;if&nbsp;ran&nbsp;exactly&nbsp;as&nbsp;written&nbsp;in&nbsp;a&nbsp;shell.&nbsp;This&nbsp;mode&nbsp;supports&nbsp;shell-isms&nbsp;like&nbsp;'&amp;&amp;'&nbsp;and&nbsp;'|'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;cmd&nbsp;is&nbsp;a&nbsp;list,&nbsp;the&nbsp;first&nbsp;element&nbsp;will&nbsp;be&nbsp;the&nbsp;executable,&nbsp;and&nbsp;further&nbsp;elements&nbsp;are&nbsp;arguments&nbsp;that&nbsp;will&nbsp;be&nbsp;passed&nbsp;to&nbsp;that&nbsp;executable.<br>
+&nbsp;<br>
+&nbsp;<br>
+@param&nbsp;raiseOnFailure&nbsp;&lt;True/False&gt;&nbsp;-&nbsp;Default&nbsp;False,&nbsp;if&nbsp;True&nbsp;a&nbsp;non-zero&nbsp;return&nbsp;from&nbsp;the&nbsp;command&nbsp;(failure)&nbsp;will&nbsp;raise&nbsp;a&nbsp;<a href="#SimpleCommandFailure">SimpleCommandFailure</a>,&nbsp;which&nbsp;contains&nbsp;all&nbsp;gathered&nbsp;output&nbsp;and&nbsp;return&nbsp;code.&nbsp;@see&nbsp;#<a href="#SimpleCommandFailure">SimpleCommandFailure</a><br>
+&nbsp;<br>
+&nbsp;<br>
+@param&nbsp;encoding&nbsp;&lt;None/str&gt;&nbsp;-&nbsp;Default&nbsp;sys.getdefaultencoding(),&nbsp;the&nbsp;program's&nbsp;output&nbsp;will&nbsp;automatically&nbsp;be&nbsp;decoded&nbsp;using&nbsp;the&nbsp;provided&nbsp;codec&nbsp;(e.x.&nbsp;"utf-8"&nbsp;or&nbsp;"ascii").<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;None&nbsp;or&nbsp;False-ish,&nbsp;data&nbsp;will&nbsp;not&nbsp;be&nbsp;decoded&nbsp;(i.e.&nbsp;in&nbsp;python3&nbsp;will&nbsp;be&nbsp;"bytes"&nbsp;type)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;unsure,&nbsp;leave&nbsp;this&nbsp;as&nbsp;it's&nbsp;default&nbsp;value,&nbsp;or&nbsp;provide&nbsp;"utf-8"<br>
+&nbsp;<br>
+&nbsp;<br>
+@return&nbsp;&lt;str&gt;&nbsp;-&nbsp;String&nbsp;of&nbsp;data&nbsp;output&nbsp;by&nbsp;the&nbsp;executed&nbsp;program.&nbsp;This&nbsp;combines&nbsp;stdout&nbsp;and&nbsp;stderr&nbsp;into&nbsp;one&nbsp;string.&nbsp;If&nbsp;you&nbsp;need&nbsp;them&nbsp;separate,&nbsp;use&nbsp;#runGetResults<br>
+&nbsp;<br>
+@raises&nbsp;<a href="#SimpleCommandFailure">SimpleCommandFailure</a>&nbsp;-&nbsp;<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;command&nbsp;cannot&nbsp;be&nbsp;executed&nbsp;(like&nbsp;program&nbsp;not&nbsp;found,&nbsp;insufficient&nbsp;permissions,&nbsp;etc)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;If&nbsp;#raiseOnFailure&nbsp;is&nbsp;set&nbsp;to&nbsp;True,&nbsp;and&nbsp;the&nbsp;program&nbsp;returns&nbsp;non-zero</tt></dd></dl>
+
+<dl><dt><a name="Simple-runGetResults"><strong>runGetResults</strong></a>(cmd, stdout<font color="#909090">=True</font>, stderr<font color="#909090">=True</font>, encoding<font color="#909090">='ascii'</font>)</dt><dd><tt>runGetResults&nbsp;-&nbsp;<a href="#Simple">Simple</a>&nbsp;method&nbsp;to&nbsp;run&nbsp;a&nbsp;command&nbsp;and&nbsp;return&nbsp;the&nbsp;results&nbsp;of&nbsp;the&nbsp;execution&nbsp;as&nbsp;a&nbsp;dict.<br>
+&nbsp;<br>
+@param&nbsp;cmd&nbsp;&lt;str/list&gt;&nbsp;-&nbsp;String&nbsp;of&nbsp;command&nbsp;and&nbsp;arguments,&nbsp;or&nbsp;list&nbsp;of&nbsp;command&nbsp;and&nbsp;arguments<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;cmd&nbsp;is&nbsp;a&nbsp;string,&nbsp;the&nbsp;command&nbsp;will&nbsp;be&nbsp;executed&nbsp;as&nbsp;if&nbsp;ran&nbsp;exactly&nbsp;as&nbsp;written&nbsp;in&nbsp;a&nbsp;shell.&nbsp;This&nbsp;mode&nbsp;supports&nbsp;shell-isms&nbsp;like&nbsp;'&amp;&amp;'&nbsp;and&nbsp;'|'<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;cmd&nbsp;is&nbsp;a&nbsp;list,&nbsp;the&nbsp;first&nbsp;element&nbsp;will&nbsp;be&nbsp;the&nbsp;executable,&nbsp;and&nbsp;further&nbsp;elements&nbsp;are&nbsp;arguments&nbsp;that&nbsp;will&nbsp;be&nbsp;passed&nbsp;to&nbsp;that&nbsp;executable.<br>
+&nbsp;<br>
+@param&nbsp;stdout&nbsp;&lt;True/False&gt;&nbsp;-&nbsp;Default&nbsp;True,&nbsp;Whether&nbsp;to&nbsp;gather&nbsp;and&nbsp;include&nbsp;program's&nbsp;stdout&nbsp;data&nbsp;in&nbsp;results.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;False,&nbsp;that&nbsp;data&nbsp;the&nbsp;program&nbsp;prints&nbsp;to&nbsp;stdout&nbsp;will&nbsp;just&nbsp;be&nbsp;output&nbsp;to&nbsp;the&nbsp;current&nbsp;tty&nbsp;and&nbsp;not&nbsp;recorded.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;True,&nbsp;it&nbsp;will&nbsp;NOT&nbsp;be&nbsp;output&nbsp;to&nbsp;the&nbsp;tty,&nbsp;and&nbsp;will&nbsp;be&nbsp;recorded&nbsp;under&nbsp;the&nbsp;key&nbsp;"stdout"&nbsp;in&nbsp;the&nbsp;return&nbsp;dict.<br>
+&nbsp;<br>
+@param&nbsp;stderr&nbsp;&lt;True/False&nbsp;or&nbsp;"stdout"/subprocess.STDOUT&gt;&nbsp;-&nbsp;Default&nbsp;True,&nbsp;Whether&nbsp;to&nbsp;gather&nbsp;and&nbsp;include&nbsp;program's&nbsp;stderr&nbsp;data&nbsp;in&nbsp;results,&nbsp;or&nbsp;to&nbsp;combine&nbsp;with&nbsp;"stdout"&nbsp;data.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;False,&nbsp;the&nbsp;data&nbsp;the&nbsp;program&nbsp;prints&nbsp;to&nbsp;stderr&nbsp;will&nbsp;just&nbsp;be&nbsp;output&nbsp;to&nbsp;the&nbsp;current&nbsp;tty&nbsp;and&nbsp;not&nbsp;recorded<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;True,&nbsp;it&nbsp;will&nbsp;NOT&nbsp;be&nbsp;output&nbsp;to&nbsp;the&nbsp;tty,&nbsp;and&nbsp;will&nbsp;be&nbsp;recorded&nbsp;under&nbsp;the&nbsp;key&nbsp;"stderr"&nbsp;in&nbsp;the&nbsp;return&nbsp;dict.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;"stdout"&nbsp;or&nbsp;subprocess.STDOUT&nbsp;-&nbsp;stderr&nbsp;data&nbsp;will&nbsp;be&nbsp;blended&nbsp;with&nbsp;stdout&nbsp;data.&nbsp;This&nbsp;requires&nbsp;that&nbsp;stdout=True.<br>
+&nbsp;<br>
+&nbsp;<br>
+@param&nbsp;encoding&nbsp;&lt;None/str&gt;&nbsp;-&nbsp;Default&nbsp;sys.getdefaultencoding(),&nbsp;the&nbsp;program's&nbsp;output&nbsp;will&nbsp;automatically&nbsp;be&nbsp;decoded&nbsp;using&nbsp;the&nbsp;provided&nbsp;codec&nbsp;(e.x.&nbsp;"utf-8"&nbsp;or&nbsp;"ascii").<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;None&nbsp;or&nbsp;False-ish,&nbsp;data&nbsp;will&nbsp;not&nbsp;be&nbsp;decoded&nbsp;(i.e.&nbsp;in&nbsp;python3&nbsp;will&nbsp;be&nbsp;"bytes"&nbsp;type)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;unsure,&nbsp;leave&nbsp;this&nbsp;as&nbsp;it's&nbsp;default&nbsp;value,&nbsp;or&nbsp;provide&nbsp;"utf-8"<br>
+&nbsp;<br>
+@return&nbsp;&lt;dict&gt;&nbsp;-&nbsp;Dict&nbsp;of&nbsp;results.&nbsp;Has&nbsp;following&nbsp;keys:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'returnCode'&nbsp;-&nbsp;&lt;int&gt;&nbsp;-&nbsp;Always&nbsp;present,&nbsp;included&nbsp;the&nbsp;integer&nbsp;return-code&nbsp;from&nbsp;the&nbsp;command.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'stdout'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;unciode/str/bytes&nbsp;(depending&nbsp;on&nbsp;#encoding)&gt;&nbsp;-&nbsp;Present&nbsp;if&nbsp;stdout=True,&nbsp;contains&nbsp;data&nbsp;output&nbsp;by&nbsp;program&nbsp;to&nbsp;stdout,&nbsp;or&nbsp;stdout+stderr&nbsp;if&nbsp;stderr&nbsp;param&nbsp;is&nbsp;"stdout"/subprocess.STDOUT<br>
+&nbsp;&nbsp;&nbsp;&nbsp;'stderr'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;unicode/str/bytes&nbsp;(depending&nbsp;on&nbsp;#encoding)&gt;&nbsp;-&nbsp;Present&nbsp;if&nbsp;stderr=True,&nbsp;contains&nbsp;data&nbsp;output&nbsp;by&nbsp;program&nbsp;to&nbsp;stderr.<br>
+&nbsp;<br>
+&nbsp;<br>
+@raises&nbsp;-&nbsp;<a href="#SimpleCommandFailure">SimpleCommandFailure</a>&nbsp;if&nbsp;it&nbsp;cannot&nbsp;launch&nbsp;the&nbsp;given&nbsp;command,&nbsp;for&nbsp;reasons&nbsp;such&nbsp;as:&nbsp;cannot&nbsp;find&nbsp;the&nbsp;executable,&nbsp;or&nbsp;no&nbsp;permission&nbsp;to&nbsp;execute,&nbsp;etc</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>BUFFER_SIZE</strong> = 4096</dl>
+
+<dl><dt><strong>SimpleCommandFailure</strong> = &lt;class 'subprocess2.simple.SimpleCommandFailure'&gt;<dd><tt><a href="#SimpleCommandFailure">SimpleCommandFailure</a>&nbsp;-&nbsp;An&nbsp;exception&nbsp;representing&nbsp;a&nbsp;failure&nbsp;in&nbsp;execution&nbsp;of&nbsp;a&nbsp;command&nbsp;using&nbsp;the&nbsp;subprocess2.<a href="#Simple">Simple</a>&nbsp;interfaces.<br>
+&nbsp;<br>
+Contains&nbsp;the&nbsp;following&nbsp;properties:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;msg&nbsp;&lt;str&gt;&nbsp;-&nbsp;The&nbsp;exception&nbsp;message&nbsp;itself<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;returnCode&nbsp;&lt;int&gt;&nbsp;-&nbsp;The&nbsp;return&nbsp;code&nbsp;of&nbsp;the&nbsp;execution<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;stdout&nbsp;&lt;None/str&gt;&nbsp;-&nbsp;Any&nbsp;collected&nbsp;stdout&nbsp;data,&nbsp;or&nbsp;"None"&nbsp;if&nbsp;none&nbsp;was&nbsp;collected.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;stderr&nbsp;&lt;None/str&gt;&nbsp;-&nbsp;Any&nbsp;collected&nbsp;stderr&nbsp;data,&nbsp;or&nbsp;"None"&nbsp;if&nbsp;none&nbsp;was&nbsp;collected.</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="SimpleCommandFailure">class <strong>SimpleCommandFailure</strong></a>(<a href="exceptions.html#Exception">exceptions.Exception</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#SimpleCommandFailure">SimpleCommandFailure</a>&nbsp;-&nbsp;An&nbsp;exception&nbsp;representing&nbsp;a&nbsp;failure&nbsp;in&nbsp;execution&nbsp;of&nbsp;a&nbsp;command&nbsp;using&nbsp;the&nbsp;subprocess2.<a href="#Simple">Simple</a>&nbsp;interfaces.<br>
+&nbsp;<br>
+Contains&nbsp;the&nbsp;following&nbsp;properties:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;msg&nbsp;&lt;str&gt;&nbsp;-&nbsp;The&nbsp;exception&nbsp;message&nbsp;itself<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;returnCode&nbsp;&lt;int&gt;&nbsp;-&nbsp;The&nbsp;return&nbsp;code&nbsp;of&nbsp;the&nbsp;execution<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;stdout&nbsp;&lt;None/str&gt;&nbsp;-&nbsp;Any&nbsp;collected&nbsp;stdout&nbsp;data,&nbsp;or&nbsp;"None"&nbsp;if&nbsp;none&nbsp;was&nbsp;collected.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;stderr&nbsp;&lt;None/str&gt;&nbsp;-&nbsp;Any&nbsp;collected&nbsp;stderr&nbsp;data,&nbsp;or&nbsp;"None"&nbsp;if&nbsp;none&nbsp;was&nbsp;collected.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="subprocess2.simple.html#SimpleCommandFailure">SimpleCommandFailure</a></dd>
+<dd><a href="exceptions.html#Exception">exceptions.Exception</a></dd>
+<dd><a href="exceptions.html#BaseException">exceptions.BaseException</a></dd>
+<dd><a href="__builtin__.html#object">__builtin__.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SimpleCommandFailure-__init__"><strong>__init__</strong></a>(self, msg, returnCode, stdout<font color="#909090">=None</font>, stderr<font color="#909090">=None</font>)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="exceptions.html#Exception">exceptions.Exception</a>:<br>
+<dl><dt><strong>__new__</strong> = &lt;built-in method __new__ of type object&gt;<dd><tt>T.<a href="#SimpleCommandFailure-__new__">__new__</a>(S,&nbsp;...)&nbsp;-&gt;&nbsp;a&nbsp;new&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;with&nbsp;type&nbsp;S,&nbsp;a&nbsp;subtype&nbsp;of&nbsp;T</tt></dl>
+
+<hr>
+Methods inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><a name="SimpleCommandFailure-__delattr__"><strong>__delattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SimpleCommandFailure-__delattr__">__delattr__</a>('name')&nbsp;&lt;==&gt;&nbsp;del&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SimpleCommandFailure-__getattribute__"><strong>__getattribute__</strong></a>(...)</dt><dd><tt>x.<a href="#SimpleCommandFailure-__getattribute__">__getattribute__</a>('name')&nbsp;&lt;==&gt;&nbsp;x.name</tt></dd></dl>
+
+<dl><dt><a name="SimpleCommandFailure-__getitem__"><strong>__getitem__</strong></a>(...)</dt><dd><tt>x.<a href="#SimpleCommandFailure-__getitem__">__getitem__</a>(y)&nbsp;&lt;==&gt;&nbsp;x[y]</tt></dd></dl>
+
+<dl><dt><a name="SimpleCommandFailure-__getslice__"><strong>__getslice__</strong></a>(...)</dt><dd><tt>x.<a href="#SimpleCommandFailure-__getslice__">__getslice__</a>(i,&nbsp;j)&nbsp;&lt;==&gt;&nbsp;x[i:j]<br>
+&nbsp;<br>
+Use&nbsp;of&nbsp;negative&nbsp;indices&nbsp;is&nbsp;not&nbsp;supported.</tt></dd></dl>
+
+<dl><dt><a name="SimpleCommandFailure-__reduce__"><strong>__reduce__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SimpleCommandFailure-__repr__"><strong>__repr__</strong></a>(...)</dt><dd><tt>x.<a href="#SimpleCommandFailure-__repr__">__repr__</a>()&nbsp;&lt;==&gt;&nbsp;repr(x)</tt></dd></dl>
+
+<dl><dt><a name="SimpleCommandFailure-__setattr__"><strong>__setattr__</strong></a>(...)</dt><dd><tt>x.<a href="#SimpleCommandFailure-__setattr__">__setattr__</a>('name',&nbsp;value)&nbsp;&lt;==&gt;&nbsp;x.name&nbsp;=&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="SimpleCommandFailure-__setstate__"><strong>__setstate__</strong></a>(...)</dt></dl>
+
+<dl><dt><a name="SimpleCommandFailure-__str__"><strong>__str__</strong></a>(...)</dt><dd><tt>x.<a href="#SimpleCommandFailure-__str__">__str__</a>()&nbsp;&lt;==&gt;&nbsp;str(x)</tt></dd></dl>
+
+<dl><dt><a name="SimpleCommandFailure-__unicode__"><strong>__unicode__</strong></a>(...)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="exceptions.html#BaseException">exceptions.BaseException</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+</dl>
+<dl><dt><strong>args</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
 </td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
@@ -250,7 +423,7 @@ To&nbsp;capture&nbsp;standard&nbsp;error&nbsp;in&nbsp;the&nbsp;result,&nbsp;use&
 <strong>SUBPROCESS2_PROCESS_COMPLETED</strong> = 0<br>
 <strong>SUBPROCESS2_PROCESS_KILLED</strong> = 2<br>
 <strong>SUBPROCESS2_PROCESS_TERMINATED</strong> = 1<br>
-<strong>__all__</strong> = ['check_output', 'SUBPROCESS2_PROCESS_TERMINATED', 'STDOUT', 'SUBPROCESS2_PROCESS_KILLED', 'Popen', 'DEFAULT_POLL_INTERVAL', 'subprocess2_version', 'PIPE', 'SUBPROCESS2_DEFAULT_TERMINATE_TO_KILL_SECONDS', 'call', 'subprocess2_version_tuple', 'check_call', 'CalledProcessError', 'SUBPROCESS2_PROCESS_COMPLETED']<br>
-<strong>subprocess2_version</strong> = '0.2.1'<br>
-<strong>subprocess2_version_tuple</strong> = (0, 2, 1)</td></tr></table>
+<strong>__all__</strong> = ['check_output', 'SUBPROCESS2_PROCESS_TERMINATED', 'STDOUT', 'SUBPROCESS2_PROCESS_KILLED', 'Popen', 'DEFAULT_POLL_INTERVAL', 'subprocess2_version', 'PIPE', 'SUBPROCESS2_DEFAULT_TERMINATE_TO_KILL_SECONDS', 'call', 'subprocess2_version_tuple', 'check_call', 'CalledProcessError', 'SUBPROCESS2_PROCESS_COMPLETED', 'Simple', 'SimpleCommandFailure']<br>
+<strong>subprocess2_version</strong> = '1.0.0'<br>
+<strong>subprocess2_version_tuple</strong> = (1, 0, 0)</td></tr></table>
 </body></html>
