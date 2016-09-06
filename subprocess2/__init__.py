@@ -40,7 +40,7 @@ from subprocess import * # I know, bad form to import *, but ensures that you ca
 __subprocessDefined = set(locals().keys()).difference(__origDefined)
 __subprocessDefined -= set(['__origDefined'])
 
-__all__ = list(__subprocessDefined)
+__all__ = list(__subprocessDefined) + ['Simple', 'SimpleCommandFailure']
 
 # Apply our global updates
 import subprocess
@@ -54,6 +54,10 @@ subprocess.subprocess2_version_tuple = subprocess2_version_tuple
 
 
 from .BackgroundTask import BackgroundTaskInfo
+
+from .simple import Simple, SimpleCommandFailure
+
+subprocess.Simple = Simple
 
 def waitUpTo(self, timeoutSeconds, pollInterval=DEFAULT_POLL_INTERVAL):
     '''
