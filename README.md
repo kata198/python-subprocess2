@@ -33,7 +33,7 @@ Get list of all executable files in current directory (and subdirs) as an array:
 
 Functions include:
 
-*runGetOutput*
+**runGetOutput**
 
 Simpliest method -- pass a command, get output on return.
 
@@ -42,7 +42,7 @@ Simpliest method -- pass a command, get output on return.
 		runGetOutput - Simply runs a command and returns the output as a string. Use #runGetResults if you need something more complex.
 
 
-**Example:**
+*Example:*
 
 	import subprocess2
 
@@ -52,7 +52,7 @@ Simpliest method -- pass a command, get output on return.
 		sys.stderr.write('Command failed [return=%d]: stderr = %s\n' %(e.returnCode, e.stderr) )
 
 
-*runGetResults*
+**runGetResults**
 
 More complicated, returns results in a dict. See docstring for all options.
 
@@ -61,7 +61,7 @@ More complicated, returns results in a dict. See docstring for all options.
 		runGetResults - Simple method to run a command and return the results of the execution as a dict.
 
 
-**Example:**
+*Example:*
 
 	import subprocess2
 
@@ -73,7 +73,7 @@ More complicated, returns results in a dict. See docstring for all options.
 		executableFiles = results['stdout'].split('\n')[:-1]
 
 
-*Full PyDoc*
+**Full PyDoc**
 
 See: htmlpreview.github.io/?https://github.com/kata198/python-subprocess2/blob/master/doc/subprocess2.Simple.html for full docstrings
 
@@ -84,7 +84,7 @@ Popen
 Additions to Popen class:
 
 
-*waitUpTo*
+**waitUpTo**
 
 
 This method adds the ability to specify a timeout when waiting for a subprocess to complete.
@@ -93,7 +93,7 @@ This method adds the ability to specify a timeout when waiting for a subprocess 
 	Popen.waitUpTo (timeoutSeconds, pollInterval) - Wait up to a certain number of seconds for the process to end.
 
 
-*waitOrTerminate*
+**waitOrTerminate**
 
 This method allows specifying a timeout, like waitUpTo, but will also handle terminating or killing the application if it exceeds the timeout (see full documentation for details and parameters)
 
@@ -121,12 +121,12 @@ You can use this to farm out 10 processes quickly, collect all their data, and w
 By default, data will be stored as bytes. To decode with a specific encoding (e.x. utf-8), pass the codec name as the "encoding" argument.
 
 
-*Full PyDoc Reference:*
+**Full PyDoc Reference:**
 
 https://htmlpreview.github.io/?https://raw.githubusercontent.com/kata198/python-subprocess2/2.0/doc/subprocess2.BackgroundTask.html
 
 
-*Method Signature:*
+**runInBackground:**
 
 	def runInBackground(self, pollInterval=.1, encoding=False):
 		'''
@@ -142,6 +142,8 @@ https://htmlpreview.github.io/?https://raw.githubusercontent.com/kata198/python-
 		'''
 
 Object returned is of type BackgroundTaskInfo ( https://htmlpreview.github.io/?https://raw.githubusercontent.com/kata198/python-subprocess2/master/doc/subprocess2.BackgroundTask.html#BackgroundTaskInfo ):
+
+**BackgroundTaskInfo**
 
 
 		'''
