@@ -1,3 +1,7 @@
+- 2.0.2 - Sep 7 2016
+ * Fix for difference in python 3.2 and 3.4+
+ * Fixup older pydocs
+
 - 2.0.1 - Sep 7 2016
  * Add "Simple" class with static methods that provide simple, direct, and intuitive access to running subprocesses and getting the results/output
  * Simplify README, include more examples and less docstrings, more links to pydocs
