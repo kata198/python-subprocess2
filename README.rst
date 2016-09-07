@@ -1,4 +1,3 @@
-==================
 python-subprocess2
 ==================
 
@@ -254,3 +253,4 @@ Tests / Examples
 ----------------
 
 Tests are written using the `GoodTests <https://github.com/kata198/GoodTests>`_ framework. They are found in the "tests" directory. Use runTests.py to download GoodTests and run the test suite, after installing subprocess2.
+

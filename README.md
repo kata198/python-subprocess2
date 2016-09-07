@@ -2,12 +2,6 @@
 
 Extensions on the python subprocess module. Importing subprocess2 will extend the global "subprocess" module (only additions, no modifications, so it's safe). 
 
-You can also import and use subprocess2 instead of the subprocess module. Doing a global extension allows your application or library to utilize the extensions without requiring modification of other codebases. In example, if you have a library that is opening a pipe and passing it to your application, it does not need to be modified for you to use the additional Popen methods on the object you received.
-
-
-Simply installing the subprocess2 module does not do anything to the parent subprocess module, until it has been imported, and then only additions are made.
-
-
 
 PyDoc Reference
 ---------------
@@ -190,9 +184,9 @@ If you decide later you wait to block the current context until one of those pip
 
 	pipe1Info = pipe1.runInBackground()
 
-	....hard work...
+	# ....do some hard work here...
 	sys.stdout.write('Current output: ' + pipe1Info.stdoutData.decode('utf-8'))
-	.... more hard work...
+	# .... more hard work...
 
 	returnCode = pipe1Info.waitToFinish()
 

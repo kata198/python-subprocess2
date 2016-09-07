@@ -31,8 +31,8 @@ SUBPROCESS2_PROCESS_TERMINATED = 1
 SUBPROCESS2_PROCESS_KILLED     = 2
 
 
-subprocess2_version = '1.0.0'
-subprocess2_version_tuple = (1, 0, 0)
+subprocess2_version = '2.0.0'
+subprocess2_version_tuple = (2, 0, 0)
 
 
 from subprocess import * # I know, bad form to import *, but ensures that you can use this interchangably with the upstream subprocess
@@ -52,6 +52,7 @@ subprocess.SUBPROCESS2_DEFAULT_TERMINATE_TO_KILL_SECONDS = SUBPROCESS2_DEFAULT_T
 subprocess.subprocess2_version = subprocess2_version
 subprocess.subprocess2_version_tuple = subprocess2_version_tuple
 
+__version__ = subprocess2_version # Only __version__ in subprocess2 module, don't backpatch this.
 
 from .BackgroundTask import BackgroundTaskInfo
 

@@ -1,3 +1,9 @@
+- 2.0.0 - Sep 7 2016
+ * Add "Simple" class with static methods that provide simple, direct, and intuitive access to running subprocesses and getting the results/output
+ * Simplify README, include more examples and less docstrings, more links to pydocs
+ * Regen pydocs
+  
+
 - 1.0.0 - June 21 2016
  * Add "encoding" field to runInBackground method (and BackgroundTask classes)
  to perform automatic decoding from bytes to a str/unicode object.
