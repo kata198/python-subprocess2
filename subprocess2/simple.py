@@ -27,8 +27,6 @@ class Simple(object):
             runGetResults - Runs a command and based on paramaters returns a dict containing: returnCode, stdout, stderr. @see #runGetResults for more details.
     '''
 
-    BUFFER_SIZE = 4096
-
     @staticmethod
     def runGetResults(cmd, stdout=True, stderr=True, encoding=sys.getdefaultencoding()):
         '''
@@ -79,7 +77,7 @@ class Simple(object):
         else:
             stdout = None
             if stderr == subprocess.PIPE:
-                raise ValeueError('Cannot redirect stderr to stdout if stdout is not captured.')
+                raise ValueError('Cannot redirect stderr to stdout if stdout is not captured.')
 
         if issubclass(cmd.__class__, (list, tuple)):
             shell = False
@@ -99,8 +97,6 @@ class Simple(object):
 
             raise SimpleCommandFailure('Failed to execute "%s": %s' %(cmdStr, str(e)), returnCode=255)
 
-
-        bufferSize = Simple.BUFFER_SIZE
 
         streams = []
         fileNoToKey = {}
