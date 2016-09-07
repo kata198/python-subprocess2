@@ -1,4 +1,4 @@
-- 2.0.0 - Sep 7 2016
+- 2.0.1 - Sep 7 2016
  * Add "Simple" class with static methods that provide simple, direct, and intuitive access to running subprocesses and getting the results/output
  * Simplify README, include more examples and less docstrings, more links to pydocs
  * Regen pydocs
