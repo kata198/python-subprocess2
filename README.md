@@ -75,7 +75,7 @@ More complicated, returns results in a dict. See docstring for all options.
 
 **Full PyDoc**
 
-See: htmlpreview.github.io/?https://github.com/kata198/python-subprocess2/blob/master/doc/subprocess2.Simple.html for full docstrings
+See: http://htmlpreview.github.io/?https://github.com/kata198/python-subprocess2/blob/master/doc/subprocess2.Simple.html for full docstrings
 
 
 Popen
