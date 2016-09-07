@@ -16,58 +16,89 @@ PyDoc Reference for extended subprocess modules can be found at: http://htmlprev
 
 
 
+Simple
+======
+
+subprocess2 provides a "Simple" class, which provides simple, direct, and intuitive static methods for running subprocesses and gathering output.
+
+
+*Example*
+
+Get list of all executable files in current directory (and subdirs) as an array:
+
+	import subprocess2
+
+	executableFiles = subprocess2.Simple.runGetOutput('find . -type f -executable').split('\n')[:-1] # All but last entry because of final newline in output
+
+
+Functions include:
+
+*runGetOutput*
+
+Simpliest method -- pass a command, get output on return.
+
+	runGetOutput(cmd, raiseOnFailure=False, encoding=sys.getdefaultencoding())
+
+		runGetOutput - Simply runs a command and returns the output as a string. Use #runGetResults if you need something more complex.
+
+
+**Example:**
+
+	import subprocess2
+
+	try:
+		executableFiles = subprocess2.Simple.runGetOutput('find . -type f -executable', raiseOnFailure=True).split('\n')[:-1]
+	except subprocess2.Simple.SimpleCommandFailure as e:
+		sys.stderr.write('Command failed [return=%d]: stderr = %s\n' %(e.returnCode, e.stderr) )
+
+
+*runGetResults*
+
+More complicated, returns results in a dict. See docstring for all options.
+
+	runGetResults(cmd, stdout=True, stderr=True, encoding=sys.getdefaultencoding())
+
+		runGetResults - Simple method to run a command and return the results of the execution as a dict.
+
+
+**Example:**
+
+	import subprocess2
+
+	results = subprocess2.Simple.runGetResults('find . -type f -executable')
+
+	if results['returnCode'] != 0:
+		sys.stderr.write('Command failed [return=%d]: stderr = %s\n' %(results['returnCode'], results['stderr']))
+	else:
+		executableFiles = results['stdout'].split('\n')[:-1]
+
+
+*Full PyDoc*
+
+See: htmlpreview.github.io/?https://github.com/kata198/python-subprocess2/blob/master/doc/subprocess2.Simple.html for full docstrings
+
+
 Popen
 =====
 
 Additions to Popen class:
 
 
-waitUpTo
---------
+*waitUpTo*
+
 
 This method adds the ability to specify a timeout when waiting for a subprocess to complete.
 
 
 	Popen.waitUpTo (timeoutSeconds, pollInterval) - Wait up to a certain number of seconds for the process to end.
-	
-		@param timeoutSeconds <float> - Number of seconds to wait
 
-		@param pollInterval <float> (default .05) - Number of seconds in between each poll
-	
-		@return - Returncode of application, or None if did not terminate.
-	
-	
 
-waitOrTerminate
----------------
+*waitOrTerminate*
 
-This method allows specifying a timeout, like waitUpTo, but will also handle terminating or killing the application if it exceeds the timeout (see documentation below).
+This method allows specifying a timeout, like waitUpTo, but will also handle terminating or killing the application if it exceeds the timeout (see full documentation for details and parameters)
 
 
 	def waitOrTerminate(self, timeoutSeconds, pollInterval=DEFAULT_POLL_INTERVAL, terminateToKillSeconds=SUBPROCESS2_DEFAULT_TERMINATE_TO_KILL_SECONDS):
-		'''
-			waitOrTerminate - Wait up to a certain number of seconds for the process to end.
-
-				If the process is running after the timeout has been exceeded, a SIGTERM will be sent. 
-				Optionally, an additional SIGKILL can be sent after some configurable interval. See #terminateToKillSeconds doc below
-
-				@param timeoutSeconds <float> - Number of seconds to wait
-
-				@param pollInterval <float> (default .05)- Number of seconds between each poll
-
-				@param terminateToKillSeconds <float/None> (default 1.5) - If application does not end before #timeoutSeconds , terminate() will be called.
-
-					* If this is set to None, an additional #pollInterval sleep will occur after calling .terminate, to allow the application to cleanup. returnCode will be return of app if finished, or None if did not complete.
-					* If this is set to 0, no terminate signal will be sent, but directly to kill. Because the application cannot trap this, returnCode will be None.
-					* If this is set to > 0, that number of seconds maximum will be given between .terminate and .kill. If the application does not terminate before KILL, returnCode will be None.
-
-				Windows Note -- On windows SIGTERM and SIGKILL are the same thing.
-
-				@return dict { 'returnCode' : <int or None> , 'actionTaken' : <int mask of SUBPROCESS2_PROCESS_*> }
-					Returns a dict representing results: 
-						"returnCode" matches return of application, or None per #terminateToKillSeconds doc above.
-						"actionTaken" is a mask of the SUBPROCESS2_PROCESS_* variables. If app completed normally, it will be SUBPROCESS2_PROCESS_COMPLETED, otherwise some mask of SUBPROCESS2_PROCESS_TERMINATED and/or SUBPROCESS2_PROCESS_KILLED
-		'''
 
 
 Background Task Management
@@ -90,7 +121,12 @@ You can use this to farm out 10 processes quickly, collect all their data, and w
 By default, data will be stored as bytes. To decode with a specific encoding (e.x. utf-8), pass the codec name as the "encoding" argument.
 
 
-Method Signature:
+*Full PyDoc Reference:*
+
+https://htmlpreview.github.io/?https://raw.githubusercontent.com/kata198/python-subprocess2/2.0/doc/subprocess2.BackgroundTask.html
+
+
+*Method Signature:*
 
 	def runInBackground(self, pollInterval=.1, encoding=False):
 		'''
@@ -105,10 +141,9 @@ Method Signature:
 			@param encoding - Default False. If provided, data will be decoded using the value of this field as the codec name (e.x. "utf-8"). Otherwise, data will be stored as bytes.
 		'''
 
-Object returned:
+Object returned is of type BackgroundTaskInfo ( https://htmlpreview.github.io/?https://raw.githubusercontent.com/kata198/python-subprocess2/master/doc/subprocess2.BackgroundTask.html#BackgroundTaskInfo ):
 
 
-	class BackgroundTaskInfo(object):
 		'''
 			BackgroundTaskInfo - Represents a task that was sent to run in the background. Will be updated as the status of that process changes.
 
@@ -127,7 +162,7 @@ Object returned:
 		'''
 
 
-So for example:
+*Example:*
 
 	import subprocess2 as subprocess
 
@@ -145,17 +180,11 @@ If you decide later you wait to block the current context until one of those pip
 
 
 	def waitToFinish(self, timeout=None, pollInterval=.1):
-		'''
+
 			waitToFinish - Wait (Block current thread), optionally with a timeout, until background task completes.
 
-			@param timeout <None/float> - None to wait forever, otherwise max number of seconds to wait
-			@param pollInterval <float> - Seconds between each poll. Keep high if interactivity is not important, low if it is.
 
-			@return - None if process did not complete (and timeout occured), otherwise the return code of the process is returned.
-		'''
-
-
-So, to continue the example above:
+*Example (continued):*
 
 	pipe1Info = pipe1.runInBackground()
 
@@ -181,7 +210,7 @@ SUBPROCESS2\_PROCESS\_KILLED     = 2 *Mask value for noting that process was sen
 Compatability
 -------------
 
-It is both python2 and python3 compatable. It has been tested under python 2.7 and 3.4.
+It is both python2 and python3 compatable. It has been tested under python 2.7, 3.4, and 3.5.
 
 Tests / Examples
 ----------------
