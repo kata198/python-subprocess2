@@ -128,7 +128,7 @@ class Simple(object):
 
                     retKey = fileNoToKey[readyStream.fileno()]
                     curRead = readyStream.read()
-                    if curRead == '':
+                    if curRead in (b'', ''):
                         streams.remove(readyStream)
                         continue
                     ret[retKey].append(curRead)
