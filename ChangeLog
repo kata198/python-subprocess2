@@ -1,3 +1,8 @@
+- 2.0.3 - ??? ? ????
+ * Cleanup READMEs somewhat
+ * switch pydoc urls from github preview to
+ pythonhosted.org
+
 - 2.0.2 - Sep 7 2016
  * Fix for difference in python 3.2 and 3.4+
  * Fixup older pydocs
