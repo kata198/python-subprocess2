@@ -1,23 +1,13 @@
 python-subprocess2
 ==================
 
-Extensions on the python subprocess module. Importing subprocess2 will extend the global "subprocess" module (only additions, no modifications, so it's safe).
-
-You can also import and use subprocess2 instead of the subprocess module. Doing a global extension allows your application or library to utilize the extensions without requiring modification of other codebases. In example, if you have a library that is opening a pipe and passing it to your application, it does not need to be modified for you to use the additional Popen methods on the object you received.
-
-
-Simply installing the subprocess2 module does not do anything to the parent subprocess module, until it has been imported, and then only additions are made.
-
-
+Extensions on the python subprocess module. Importing subprocess2 will extend the global "subprocess" module (only additions, no modifications, so it's safe). 
 
 
 PyDoc Reference
 ---------------
 
-PyDoc Reference for extended subprocess modules can be found at: http://htmlpreview.github.io/?https://github.com/kata198/python-subprocess2/blob/master/doc/subprocess2.html
-
-
-
+The full PyDoc reference for extended subprocess modules can be found at: http://pythonhosted.org/python-subprocess2/
 
 
 Popen
@@ -26,80 +16,31 @@ Popen
 Additions to Popen class:
 
 
-
-
 **waitUpTo**
 
 
 This method adds the ability to specify a timeout when waiting for a subprocess to complete.
 
 
-    Popen.waitUpTo (timeoutSeconds, pollInterval) - Wait up to a certain number of seconds for the process to end.
+	Popen.waitUpTo (timeoutSeconds, pollInterval)
 
-
-        @param timeoutSeconds <float> - Number of seconds to wait
-
-        @param pollInterval <float> (default .05) - Number of seconds in between each poll
-
-
-        @return - Returncode of application, or None if did not terminate.
-
-
-
+	Wait up to a certain number of seconds for the process to end.
 
 
 **waitOrTerminate**
 
-
-This method allows specifying a timeout, like waitUpTo, but will also handle terminating or killing the application if it exceeds the timeout (see documentation below).
-
-	Popen.waitOrTerminate(self, timeoutSeconds, pollInterval=DEFAULT_POLL_INTERVAL, terminateToKillSeconds=SUBPROCESS2_DEFAULT_TERMINATE_TO_KILL_SECONDS):
-
-		'''
-
-			waitOrTerminate - Wait up to a certain number of seconds for the process to end.
+This method allows specifying a timeout, like waitUpTo, but will also handle terminating or killing the application if it exceeds the timeout (see full documentation for details and parameters)
 
 
-				If the process is running after the timeout has been exceeded, a SIGTERM will be sent. 
+	def waitOrTerminate(self, timeoutSeconds, pollInterval=DEFAULT_POLL_INTERVAL, terminateToKillSeconds=SUBPROCESS2_DEFAULT_TERMINATE_TO_KILL_SECONDS):
 
-				Optionally, an additional SIGKILL can be sent after some configurable interval. See #terminateToKillSeconds doc below
-
-
-				@param timeoutSeconds <float> - Number of seconds to wait
-
-
-				@param pollInterval <float> (default .05)- Number of seconds between each poll
-
-
-				@param terminateToKillSeconds <float/None> (default 1.5) - If application does not end before #timeoutSeconds , terminate() will be called.
-
-
-					* If this is set to None, an additional #pollInterval sleep will occur after calling .terminate, to allow the application to cleanup. returnCode will be return of app if finished, or None if did not complete.
-
-					* If this is set to 0, no terminate signal will be sent, but directly to kill. Because the application cannot trap this, returnCode will be None.
-
-					* If this is set to > 0, that number of seconds maximum will be given between .terminate and .kill. If the application does not terminate before KILL, returnCode will be None.
-
-
-				Windows Note -- On windows SIGTERM and SIGKILL are the same thing.
-
-
-				@return dict { 'returnCode' : <int or None> , 'actionTaken' : <int mask of SUBPROCESS2_PROCESS_*> }
-
-					Returns a dict representing results: 
-
-						"returnCode" matches return of application, or None per #terminateToKillSeconds doc above.
-
-						"actionTaken" is a mask of the SUBPROCESS2_PROCESS_* variables. If app completed normally, it will be SUBPROCESS2_PROCESS_COMPLETED, otherwise some mask of SUBPROCESS2_PROCESS_TERMINATED and/or SUBPROCESS2_PROCESS_KILLED
-
-		'''
 
 Background Task Management
 ==========================
 
 One of the benefits to modern computing is the ability to multitask. Your application may want to start several sub processes at once, and have them all collecting output simultaneously. The standard python "subprocess" module does not provide a simple approach through it's API to do this.
 
-subprocess2 extends the Popen module by adding the notion of a "Background Task." When you call "runInBackground" on a pipe object, it will create and start a thread to automatically handle that process.
+subprocess2 extends the Popen module by adding the notion of a "Background Task." When you call "runInBackground" on a pipe object, it will create and start a thread to automatically handle that process. 
 
 Calling "runInBackground" on a pipe returns a "BackgroundTaskInfo" option, which is dynamically updated as the status the subprocess progresses. 
 
@@ -107,13 +48,19 @@ If you have open streams (stdout, stderr), they will automatically be read in no
 
 When the subprocess terminates, the "returnCode" field will be set, and "isFinished" will be marked True.
 
-By default, data will be stored as bytes. To decode with a specific encoding (e.x. utf-8), pass the codec name as the "encoding" argument.
-
 
 You can use this to farm out 10 processes quickly, collect all their data, and wait for them to complete. Other uses may be long-running associated proccesses, such as several searches collecting data, all being used to update a display.
 
 
-Method Signature:
+By default, data will be stored as bytes. To decode with a specific encoding (e.x. utf-8), pass the codec name as the "encoding" argument.
+
+
+**BackgroundTask PyDoc Reference:**
+
+http://pythonhosted.org/python-subprocess2/subprocess2.BackgroundTask.html
+
+
+**runInBackground:**
 
 	def runInBackground(self, pollInterval=.1, encoding=False):
 
@@ -122,13 +69,12 @@ Method Signature:
 			runInBackground - Create a background thread which will manage this process, automatically read from streams, and perform any cleanups
 
 
+			The object returned is a "BackgroundTaskInfo" object, and represents the state of the process. It is updated automatically as the program runs,
 
-			  The object returned is a "BackgroundTaskInfo" object, and represents the state of the process. It is updated automatically as the program runs,
-
-				and if stdout or stderr are streams, they are automatically read from and populated into this object.
+			and if stdout or stderr are streams, they are automatically read from and populated into this object.
 
 
-			 @see BackgroundTaskInfo for more info or https://htmlpreview.github.io/?https://raw.githubusercontent.com/kata198/python-subprocess2/master/doc/subprocess2.BackgroundTask.html
+			@see BackgroundTaskInfo for more info or http://pythonhosted.org/python-subprocess2/subprocess2.BackgroundTask.html
 
 
 			@param pollInterval - Amount of idle time between polling
@@ -138,10 +84,10 @@ Method Signature:
 		'''
 
 
-Object returned:
+Object returned is of type BackgroundTaskInfo ( http://pythonhosted.org/python-subprocess2/subprocess2.BackgroundTask.html#BackgroundTaskInfo ):
 
+**BackgroundTaskInfo**
 
-	class BackgroundTaskInfo(object):
 
 		'''
 
@@ -171,7 +117,9 @@ Object returned:
 		'''
 
 
-So for example:
+
+*Example:*
+
 
 	import subprocess2 as subprocess
 
@@ -188,69 +136,132 @@ So for example:
 
 will have two processes running in the background, collecting their output automatically, and cleaning up automatically.
 
-
 If you decide later you wait to block the current context until one of those pipes complete, you can pull it back into foreground (while maintaining the automatic population of streams/values) by calling "waitToFinish" on the BackgroundTaskInfo.
 
 
 	def waitToFinish(self, timeout=None, pollInterval=.1):
 
-		'''
 
-			waitToFinish - Wait (Block current thread), optionally with a timeout, until background task completes.
-
+			Wait (Block current thread), optionally with a timeout, until background task completes.
 
 
-			@param timeout <None/float> - None to wait forever, otherwise max number of seconds to wait
-
-			@param pollInterval <float> - Seconds between each poll. Keep high if interactivity is not important, low if it is.
-
-
-
-			@return - None if process did not complete (and timeout occured), otherwise the return code of the process is returned.
-
-		'''
-
-
-So, to continue the example above:
-
+*Example (continued):*
 
 	pipe1Info = pipe1.runInBackground()
 
 
-	....hard work...
+	# ....do some hard work here...
 
 	sys.stdout.write('Current output: ' + pipe1Info.stdoutData.decode('utf-8'))
 
-	.... more hard work...
-
+	# .... more hard work...
 
 
 	returnCode = pipe1Info.waitToFinish()
 
 
+Simple
+======
+
+subprocess2 provides a "Simple" class, which provides simple, direct, and intuitive static methods for running subprocesses and gathering output.
+
+
+*Example*
+
+Get list of all executable files in current directory (and subdirs) as an array:
+
+	import subprocess2
+
+
+	executableFiles = subprocess2.Simple.runGetOutput('find . -type f -executable').split('\n')[:-1] # All but last entry because of final newline in output
+
+
+Functions include:
+
+**runGetOutput**
+
+Simpliest method -- pass a command, get output on return.
+
+	runGetOutput(cmd, raiseOnFailure=False, encoding=sys.getdefaultencoding())
+
+
+		runGetOutput - Simply runs a command and returns the output as a string. Use #runGetResults if you need something more complex.
+
+
+*Example:*
+
+	import subprocess2
+
+
+	try:
+
+		executableFiles = subprocess2.Simple.runGetOutput('find . -type f -executable', raiseOnFailure=True).split('\n')[:-1]
+
+	except subprocess2.Simple.SimpleCommandFailure as e:
+
+		sys.stderr.write('Command failed [return=%d]: stderr = %s\n' %(e.returnCode, e.stderr) )
+
+
+
+**runGetResults**
+
+More complicated, returns results in a dict. See docstring for all options.
+
+	runGetResults(cmd, stdout=True, stderr=True, encoding=sys.getdefaultencoding())
+
+
+		runGetResults - Simple method to run a command and return the results of the execution as a dict.
+
+
+*Example:*
+
+	import subprocess2
+
+
+	results = subprocess2.Simple.runGetResults('find . -type f -executable')
+
+
+	if results['returnCode'] != 0:
+
+		sys.stderr.write('Command failed [return=%d]: stderr = %s\n' %(results['returnCode'], results['stderr']))
+
+	else:
+
+		executableFiles = results['stdout'].split('\n')[:-1]
+
+
+
+**"Simple" PyDoc**
+
+See: http://pythonhosted.org/python-subprocess2/subprocess2.simple.html for the pydoc of the "Simple" helper
+
 
 Constants
 ---------
 
-DEFAULT_POLL_INTERVAL = .05 *Number of seconds as default for polling interval*
+DEFAULT\_POLL\_INTERVAL = .05 *Number of seconds as default for polling interval*
 
-SUBPROCESS2_DEFAULT_TERMINATE_TO_KILL_SECONDS = 1.5 *Default number of seconds between SIGTERM and SIGKILL for Popen.waitOrTerminate method*
-
-SUBPROCESS2_PROCESS_COMPLETED  = 0 *Mask value for noting that process completed by itself*
-SUBPROCESS2_PROCESS_TERMINATED = 1 *Mask value for noting that process was sent SIGTERM*
-SUBPROCESS2_PROCESS_KILLED     = 2 *Mask value for noting that process was sent SIGKILL*
+SUBPROCESS2\_DEFAULT\_TERMINATE\_TO\_KILL\_SECONDS = 1.5 *Default number of seconds between SIGTERM and SIGKILL for Popen.waitOrTerminate method*
 
 
+SUBPROCESS2\_PROCESS\_COMPLETED  = 0 *Mask value for noting that process completed by itself*
+
+SUBPROCESS2\_PROCESS\_TERMINATED = 1 *Mask value for noting that process was sent SIGTERM*
+
+SUBPROCESS2\_PROCESS\_KILLED     = 2 *Mask value for noting that process was sent SIGKILL*
 
 
 Compatability
 -------------
 
-It is both python2 and python3 compatable. It has been tested under python 2.7 and 3.4.
+Officially supported python versions are 2.7, 3.4, 3.5, and 3.6.
 
 
 Tests / Examples
 ----------------
 
-Tests are written using the `GoodTests <https://github.com/kata198/GoodTests>`_ framework. They are found in the "tests" directory. Use runTests.py to download GoodTests and run the test suite, after installing subprocess2.
+Tests are written using the GoodTests ( <https://github.com/kata198/GoodTests> ) framework.
 
+The tests can be found in the "tests" directory of the project root.
+
+Use runTests.py in that directory to download GoodTests (if not already available/installed) and run the test suite against the local instance of subprocess2.
