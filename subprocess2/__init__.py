@@ -156,7 +156,7 @@ def runInBackground(self, pollInterval=.1, encoding=False):
           The object returned is a "BackgroundTaskInfo" object, and represents the state of the process. It is updated automatically as the program runs,
             and if stdout or stderr are streams, they are automatically read from and populated into this object.
 
-         @see BackgroundTaskInfo for more info or https://htmlpreview.github.io/?https://raw.githubusercontent.com/kata198/python-subprocess2/master/doc/subprocess2.BackgroundTask.html
+         @see BackgroundTaskInfo for more info or http://pythonhosted.org/python-subprocess2/subprocess2.BackgroundTask.html
 
         @param pollInterval - Amount of idle time between polling
         @param encoding - Default False. If provided, data will be decoded using the value of this field as the codec name (e.x. "utf-8"). Otherwise, data will be stored as bytes.
